@@ -237,7 +237,6 @@ class DatabaseService {
       return downloadURL;
     }
   }
-
   Stream<List<Claim?>> farmerClaimList(String? select_claim_state) {
     return claim_collection
         .orderBy('timestamp', descending: true)

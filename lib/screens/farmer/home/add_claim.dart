@@ -1,4 +1,6 @@
 import 'dart:io';
+// import 'dart:html' as html;
+import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:latlng/latlng.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,10 @@ import 'package:crop_damage_assessment_app/services/database.dart';
 import 'package:crop_damage_assessment_app/components/loading.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:crop_damage_assessment_app/components/decoration.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/farmer_dashboard.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/home/claim_dashboard.dart';
+import 'package:flutter/foundation.dart' show Uint8List, kIsWeb;
+
+import 'farmer_dashboard.dart';
 
 class AddClaim extends StatefulWidget {
   const AddClaim({Key? key, required this.uid}) : super(key: key);
@@ -45,7 +50,7 @@ class _AddClaimState extends State<AddClaim> {
 
   String damage_date = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
-  XFile? video_file;
+   XFile? video_file;
   List<XFile>? image_files = <XFile>[];
 
   late VideoPlayerController _videoPlayerController;
@@ -246,10 +251,35 @@ class _AddClaimState extends State<AddClaim> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),                  
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Claim Details',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                          color: Color.fromARGB(255, 32, 196, 100)),
+                    )),
+                      const SizedBox(height: 5.0),        
                   TextFormField(
                     keyboardType: TextInputType.name,
-                    decoration: textInputDecoration.copyWith(hintText: 'Claim Name'),
+                    decoration: textInputDecoration.copyWith(
+                      border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                      
+                      hintText: 'Claim Name'),
                     validator: (val) =>
                         val!.isEmpty ? 'Enter claim name' : null,
                     onChanged: (val) {
@@ -276,7 +306,19 @@ class _AddClaimState extends State<AddClaim> {
                       focusNode: fieldFocusNode,
                       keyboardType: TextInputType.text,
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'Crop Type'),
+                          textInputDecoration.copyWith(
+                               border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Crop Type'),
                       validator: (val) =>
                           crop_type.isEmpty ? 'Select crop type' : null,
                       onChanged: (val) {
@@ -308,6 +350,18 @@ class _AddClaimState extends State<AddClaim> {
                       focusNode: fieldFocusNode,
                       keyboardType: TextInputType.text,
                       decoration: textInputDecoration.copyWith(
+                           border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                           hintText: 'Reason for Damage'),
                       validator: (val) =>
                           reason.isEmpty ? 'Select the reason' : null,
@@ -321,13 +375,25 @@ class _AddClaimState extends State<AddClaim> {
                     setState(() => error = "");
                     // debugPrint('You just selected $selection');
                   }),
-                  const SizedBox(height: 20.0),
+                   const SizedBox(height: 30.0),
                   TextFormField(
                     keyboardType: TextInputType.text,
                     minLines: 3,
                     maxLines: 6,
                     decoration:
-                        textInputDecoration.copyWith(hintText: 'Description'),
+                        textInputDecoration.copyWith(
+                             border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Description'),
                     validator: (val) =>
                         val!.isEmpty ? 'Enter description' : null,
                     onChanged: (val) {
@@ -354,6 +420,18 @@ class _AddClaimState extends State<AddClaim> {
                       focusNode: fieldFocusNode,
                       keyboardType: TextInputType.text,
                       decoration: textInputDecoration.copyWith(
+                           border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                           hintText: 'Agrarian Division'),
                       validator: (val) => agrarian_division.isEmpty
                           ? 'Select your agrarian division'
@@ -387,7 +465,19 @@ class _AddClaimState extends State<AddClaim> {
                       focusNode: fieldFocusNode,
                       keyboardType: TextInputType.text,
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'Province'),
+                          textInputDecoration.copyWith(
+                               border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Province'),
                       validator: (val) =>
                           province.isEmpty ? 'Select your province' : null,
                       onChanged: (val) {
@@ -421,6 +511,7 @@ class _AddClaimState extends State<AddClaim> {
                     child: Container(
                       alignment: Alignment.center,
                       height: 60.0,
+                      
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -437,7 +528,7 @@ class _AddClaimState extends State<AddClaim> {
                                   Text(
                                     " $damage_date",
                                     style: const TextStyle(
-                                        color: Color.fromARGB(255, 10, 10, 10),
+                                        color: Color.fromARGB(255, 26, 130, 1),
                                         fontSize: 16.0),
                                   ),
                                 ],
@@ -452,6 +543,18 @@ class _AddClaimState extends State<AddClaim> {
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: textInputDecoration.copyWith(
+                         border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                         hintText: 'Damaged Area (sqft)'),
                     validator: (val) =>
                         val!.isEmpty ? 'Enter damage area' : null,
@@ -464,6 +567,18 @@ class _AddClaimState extends State<AddClaim> {
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: textInputDecoration.copyWith(
+                         border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                         hintText: 'Estimated Damage (LKR)'),
                     validator: (val) =>
                         val!.isEmpty ? 'Enter estimate damage' : null,
@@ -476,7 +591,7 @@ class _AddClaimState extends State<AddClaim> {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Add Evidence',
+                      'Evidence',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -487,7 +602,7 @@ class _AddClaimState extends State<AddClaim> {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Make sure to turn on location while using camera',
+                      'Turn on location while using camera',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 13.0,
@@ -500,7 +615,7 @@ class _AddClaimState extends State<AddClaim> {
                     child: TextButton(
                       child: const Icon(
                         Icons.add_a_photo,
-                        size: 50,
+                        size: 40,
                       ),
                       style: TextButton.styleFrom(
                         primary: _isImageFileEmpty()
@@ -548,6 +663,7 @@ class _AddClaimState extends State<AddClaim> {
                             child: const Icon(
                               Icons.video_call_rounded,
                               size: 50,
+                              color: const Color.fromARGB(255, 32, 196, 100),
                             ),
                             onPressed: getVideo,
                           ),
@@ -555,11 +671,17 @@ class _AddClaimState extends State<AddClaim> {
                   const SizedBox(height: 20.0),
                   ElevatedButton(
                       child: const Text('Submit'),
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(
-                            255, 71, 143, 75), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
+                     style: ElevatedButton.styleFrom(
+                              primary: const Color.fromARGB(
+                                  255, 71, 143, 75), // background
+                              onPrimary: Colors.white, // foreground
+                              textStyle: const TextStyle(fontSize: 20),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 50.0),
+                            ),
                       onPressed: isSubmitComplete
                           ? null
                           : () async {
@@ -584,7 +706,7 @@ class _AddClaimState extends State<AddClaim> {
                                         .reduce((a, b) => a + b) /
                                     locations.length;
 
-                                for (XFile? img in image_files!) {
+                                 for (XFile? img in image_files!) {
                                   String claim_image_url = await db.uploadFileToFirebase( "claim_image", "claim_image_", img);
                                   claim_image_urls.add(claim_image_url);
                                 }

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:578822898762:android:d41e5bfed6efd8f96d92b3",
         "android_client_info": {
-          "package_name": "com.example.crop_damage_assessment_app"
+          "package_name": "com.example.crop_assister"
         }
       },
       "oauth_client": [

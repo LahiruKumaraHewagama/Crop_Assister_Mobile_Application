@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:crop_damage_assessment_app/models/notification.dart'
     as fnotification;
-import '../farmer/home/farmer_dashboard.dart';
+import '../farmer/home/claim_dashboard.dart';
 import 'notification.dart';
 import 'package:intl/intl.dart';
 // import 'package:crop_damage_assessment_app/models/notification.dart';

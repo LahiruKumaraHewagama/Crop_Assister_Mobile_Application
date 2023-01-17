@@ -1,27 +1,22 @@
-import 'package:crop_damage_assessment_app/models/notification_model.dart';
-import 'package:crop_damage_assessment_app/models/notification.dart'
-    as fnotification;
-import 'package:crop_damage_assessment_app/screens/farmer/home/filter.dart';
-import 'package:crop_damage_assessment_app/screens/notification/view_notification_list.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/home/claim_profile.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/home/claim_view.dart';
+import 'package:crop_damage_assessment_app/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:crop_damage_assessment_app/models/claim.dart';
 import 'package:crop_damage_assessment_app/services/auth.dart';
-import 'package:crop_damage_assessment_app/services/database.dart';
-import 'package:crop_damage_assessment_app/components/loading.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/add_claim.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/edit_farmer.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/view_claim_list.dart';
 
+import '../../../models/notification_model.dart';
 import '../../notification/notification.dart';
+import '../../notification/view_notification_list.dart';
+import '../../officer/home/filter.dart';
+import 'claim_dashboard.dart';
+import 'edit_farmer.dart';
 
 class FarmerDashboard extends StatefulWidget {
-  const FarmerDashboard({Key? key, required this.uid}) : super(key: key);
+ 
+  const FarmerDashboard({Key? key,required this.uid}) : super(key: key);
 
-  final String? uid;
+  final uid; 
 
   @override
   _FarmerDashboardState createState() => _FarmerDashboardState();
@@ -29,6 +24,7 @@ class FarmerDashboard extends StatefulWidget {
 
 class _FarmerDashboardState extends State<FarmerDashboard> {
   final AuthService _auth = AuthService();
+
   late DatabaseService db;
   bool loading = true;
   final NotificationService notificationservice = NotificationService();
@@ -36,109 +32,16 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
   List<dynamic> _notifications = [];
   List<NotificationModel> notification_list = [];
 
-  var filter = {"claim_state": "", "agrarian_division": ""};
-
-  void initFarmer() async {
-    print("initFarmer");
-    db = DatabaseService(uid: widget.uid);
-    db.set_select_uid = widget.uid!;
-    final preference = await SharedPreferences.getInstance();
-    filter["claim_state"] = preference.getString('claim_state') ?? "Pending";
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initFarmer();
-    _getAllNotifications();
-
-    // FirebaseMessaging.instance.getInitialMessage();
-
-    // //foreground
-    // FirebaseMessaging.onMessage.listen((message){
-    //   if(message.notification != null){
-    //       print(message.notification!.body);
-    //       print(message.notification!.title);
-    //   }
-    // });
-  }
-
-  _getAllNotifications() async {
-    String uid = widget.uid!;
-    var allnotifications =
-        await notificationservice.fetchAllNotificationDetails(uid);
-    allnotifications.forEach((notification) {
-      print(notification['to'] +
-          "------------------------------------------------------------");
-      if (notification['status'] == 'unread') {
-        setState(() {
-          _notifications.add(notification);
-        });
-      }
-    });
-    _notifications.sort((a, b) => b['date'].compareTo(a['date']));
-    await _createList();
-  }
-
-  _createList() async {
-    await Future.forEach(_notifications, (dynamic element) async {
-      var notification_id = element['notificationid'];
-      var claimState = element['claimState'];
-      var to = element['to'];
-      var datetime = DateFormat.jm()
-          .add_yMd()
-          .format(DateTime.parse(element['date'].toDate().toString()));
-      // var datetime = element['date'];
-      var message = element['message'];
-
-      var from = "";
-
-      var model = NotificationModel(
-          notification_id: notification_id,
-          to: to,
-          status: claimState,
-          from: from,
-          datetime: datetime,
-          message: message);
-      notification_list.add(model);
-    });
-
-    setState(() {});
-  }
-
-  // _updateNotification(int index) async {
-  //   dynamic notifi = _notifications[index];
-  //   final notification = fnotification.Notification(notifi['notificationid'],
-  //       from: notifi['from'],
-  //       to: notifi['to'],
-  //       message: notifi['message'],
-  //       status: "read",
-  //       claimState: notifi['claimState'],
-  //       date: DateTime.parse(notifi['date'].toDate().toString()));
-
-  //   notificationservice.updateNotification(notification);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? const Loading()
-        : StreamProvider<List<Claim?>>.value(
-            value: db.farmerClaimList(filter["claim_state"]),
-            initialData: const [],
-            child: DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                body: NestedScrollView(
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      SliverAppBar(
-                        title: const Text('Crop Assister - Farmer'),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              title: const Text('Crop Assister - Farmer'),
                         backgroundColor:
                             const Color.fromARGB(255, 122, 156, 122),
                         elevation: 0.0,
@@ -188,7 +91,6 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                               // print("this is filter result");
                               // print(filter_result);
                               // Type type = filter_result.runtimeType;
-
                               // print(filter_result != null);
 
                               if (filter_result != null && filter_result) {
@@ -205,32 +107,112 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                               onPressed: () async {
                                 await _auth.signoutUser(widget.key, context);
                               })
-                        ],
-                        pinned: true,
-                        floating: true,
-                        bottom: TabBar(
-                          isScrollable: true,
-                          indicatorPadding: const EdgeInsets.all(10),
-                          indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            color: const Color.fromARGB(255, 53, 92, 66),
-                          ),
-                          tabs: const [
-                            Tab(child: Text('View Claims')),
-                            Tab(child: Text('Add Claim'))
-                          ],
-                        ),
-                      ),
-                    ];
-                  },
-                  body: TabBarView(
-                    children: <Widget>[
-                      ViewClaimList(uid: widget.uid),
-                      AddClaim(uid: widget.uid)
-                    ],
+                        ])];
+        },
+        body: Container(
+              padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 50.0),            
+                      
+                      child: Column(
+                        children: <Widget>[
+                          const SizedBox(height: 1.0),
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
+                          const SizedBox(height: 5.0),
+                          const Text('WELCOME',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 30,
+                                  color: Color.fromARGB(255, 4, 92, 9))),
+                          const SizedBox(height: 10.0),
+                           const Text('“CropAssister” is mobile application to submit the compensation claims together with evidence of damage (E.g. photos/videos) which allows the crop damage compensation process to be more effective and less fraudulent.',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,                                  
+                                  color: Color.fromARGB(255, 4, 92, 9)),
+                                  textAlign:TextAlign.center),
+                          const SizedBox(height: 30.0),
+                          Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Card(
+        elevation: 5,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(             
+
+              title: Text("YOUR CLAIMS",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Color.fromARGB(255, 0, 0, 0)),
+                      textAlign: TextAlign.center,),                      
+              subtitle: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment :CrossAxisAlignment.center,
+                children: <Widget>[
+                   
+                   const SizedBox(width: 10.0),
+                   
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: const Icon(Icons.check,color:Color.fromARGB(255, 0, 153, 8),size: 40,),
+                    
                   ),
-                ),
-                drawer: Drawer(
+                  const SizedBox(width: 50.0),
+                  Align(
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.close ,color:Color.fromARGB(255, 219, 0, 0),size: 40, ),
+                  ),
+                   const SizedBox(width: 50.0),
+                   Align(
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.rotate_right_sharp,color:Color.fromARGB(255, 182, 154, 0),size: 40,),
+                  ),
+                ],
+              ),             
+                           
+            ),
+          ],
+        ),
+      ),
+    ), const SizedBox(height: 25.0),
+                          ElevatedButton(
+                             child: const Text('GET START'),
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color.fromARGB(
+                                  255, 71, 143, 75), // background
+                              onPrimary: Colors.white, // foreground
+                              textStyle: const TextStyle(fontSize: 20),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 50.0),
+                            ), onPressed: () { 
+                               Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ClaimDashboard(uid: widget.uid)),
+                          );
+                             },),
+                             Text(
+                            style: TextStyle(
+                                fontStyle: FontStyle.normal,
+                                fontSize: 15,
+                                color: Color.fromARGB(255, 4, 92, 9)),
+                            'Apply for a new Claim', //title
+                            textAlign: TextAlign.end, //aligment
+                          ),
+                              
+                          const SizedBox(height: 12.0),
+                         
+                        ],
+                      ),
+                    )                
+            
+      ),
+         drawer: Drawer(
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
@@ -239,6 +221,28 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                           color: Color.fromARGB(255, 105, 184, 109),
                         ),
                         child: Text('Crop Assister'),
+                      ),
+                       ListTile(
+                        title: const Text('Home'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    FarmerDashboard(uid: widget.uid)),
+                          );
+                        },
+                      ),
+                       ListTile(
+                        title: const Text('Claims'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ClaimDashboard(uid: widget.uid)),
+                          );
+                        },
                       ),
                       ListTile(
                         title: const Text('Settings'),
@@ -278,7 +282,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                     ],
                   ),
                 ),
-              ),
-            ));
+      ),
+    );
   }
 }

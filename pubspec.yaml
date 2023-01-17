@@ -60,6 +60,8 @@ dependencies:
   latlng: ^0.2.0
   flutter_spinkit: ^5.1.0
   cool_alert: ^1.1.0
+  image_picker_web: ^3.0.0+1
+  file_picker: ^5.2.5
 
 
 dev_dependencies:

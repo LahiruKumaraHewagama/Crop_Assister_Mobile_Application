@@ -37,6 +37,7 @@ class _SignInState extends State<SignIn> {
         ? const Loading()
         : Scaffold(
             backgroundColor: Color.fromARGB(255, 250, 250, 250),
+            resizeToAvoidBottomInset: false, 
             // appBar: AppBar(
             //   title: const Text('Sign In to Crop Assister'),
             //   backgroundColor: const Color.fromARGB(255, 71, 143, 75),
@@ -60,7 +61,7 @@ class _SignInState extends State<SignIn> {
                       key: _formKey_1,
                       child: Column(
                         children: <Widget>[
-                          const SizedBox(height: 30.0),
+                          // const SizedBox(height: 30.0),
                           Image.network(
                               'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
                           const SizedBox(height: 20.0),
@@ -111,7 +112,7 @@ class _SignInState extends State<SignIn> {
                                   borderRadius: new BorderRadius.circular(20.0),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 20.0, horizontal: 55.0),
+                                    vertical: 10.0, horizontal: 55.0),
                               ),
                               onPressed: () async {
                                 if (_formKey_1.currentState != null &&
@@ -143,7 +144,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: new BorderRadius.circular(20.0),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 50.0),
+                                  vertical: 10.0, horizontal: 50.0),
                             ),
                             onPressed: () => widget.toggleView(2),
                           ),

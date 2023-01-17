@@ -278,11 +278,11 @@ class _OfficerAddDataState extends State<OfficerAddData> {
 
                             DatabaseService db = DatabaseService(uid: widget.uid);
                             String profile_url = "";
-                            if (profile_image == null) {
-                              profile_url = "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
-                            } else {
-                              profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
-                            }
+                            // if (profile_image == null) {
+                            //   profile_url = "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
+                            // } else {
+                            //   profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
+                            // }
                             
                             var user_data = {
                               "uid": widget.uid,

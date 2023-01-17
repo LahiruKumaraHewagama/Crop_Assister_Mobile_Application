@@ -7,11 +7,14 @@ import 'package:crop_damage_assessment_app/models/user.dart';
 import 'package:crop_damage_assessment_app/models/user_auth.dart';
 import 'package:crop_damage_assessment_app/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:crop_damage_assessment_app/components/loading.dart';
 import 'package:crop_damage_assessment_app/screens/farmer/sign_up_farmer.dart';
 import 'package:crop_damage_assessment_app/screens/officer/add_officer.dart';
 import 'package:crop_damage_assessment_app/screens/admin/admin_dashboard.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/farmer_dashboard.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/home/claim_dashboard.dart';
 import 'package:crop_damage_assessment_app/screens/officer/home/officer_dashboard.dart';
+
+import 'farmer/home/farmer_dashboard.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -55,7 +58,7 @@ class _HomeState extends State<Home> {
                 return FarmerAddData(uid: user_auth?.uid, phone_no: user_auth?.phone_no);
             }
           } else {
-            return FarmerAddData(uid: user_auth?.uid, phone_no: user_auth?.phone_no);
+            return const Loading();
           }
         });
   }

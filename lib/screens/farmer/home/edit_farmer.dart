@@ -7,7 +7,9 @@ import 'package:crop_damage_assessment_app/services/auth.dart';
 import 'package:crop_damage_assessment_app/services/database.dart';
 import 'package:crop_damage_assessment_app/components/loading.dart';
 import 'package:crop_damage_assessment_app/components/decoration.dart';
-import 'package:crop_damage_assessment_app/screens/farmer/home/farmer_dashboard.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/home/claim_dashboard.dart';
+
+import 'farmer_dashboard.dart';
 
 Farmer? user;
 
@@ -419,12 +421,12 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                               DatabaseService db =
                                   DatabaseService(uid: widget.uid);
 
-                              if (profile_image == null) {
-                                profile_url = profile_network_image;
-                              } else {
-                                profile_url = await db.uploadFileToFirebase(
-                                    "profile", "profile_", profile_image);
-                              }
+                              // if (profile_image == null) {
+                              //   profile_url = profile_network_image;
+                              // } else {
+                              //   profile_url = await db.uploadFileToFirebase(
+                              //       "profile", "profile_", profile_image);
+                              // }
 
                               var user_data = {
                                 "uid": widget.uid,

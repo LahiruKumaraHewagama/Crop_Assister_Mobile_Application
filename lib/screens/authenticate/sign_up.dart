@@ -37,6 +37,7 @@ class _SignUpState extends State<SignUp> {
         ? const Loading()
         : Scaffold(
             backgroundColor: const Color.fromARGB(255, 242, 255, 243),
+            resizeToAvoidBottomInset: false, 
             // appBar: AppBar(
             //   title: const Text('Sign Up to Crop Assister'),
             //   backgroundColor: const Color.fromARGB(255, 71, 143, 75),
@@ -109,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                                 borderRadius: new BorderRadius.circular(20.0),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 50.0),
+                                  vertical: 10.0, horizontal: 50.0),
                             ),
                               onPressed: () async {
                                 if (_formKey_1.currentState != null &&

@@ -321,11 +321,11 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                               String profile_url = "";
                               DatabaseService db = DatabaseService(uid: widget.uid);
 
-                              if (profile_image == null) {
-                                profile_url = profile_network_image;
-                              } else {
-                                profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
-                              }
+                              // if (profile_image == null) {
+                              //   profile_url = profile_network_image;
+                              // } else {
+                              //   profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
+                              // }
 
                               var user_data = {
                                 "uid": widget.uid,
