@@ -1,7 +1,6 @@
 # CROP ASSISTER
 
 <img src="https://user-images.githubusercontent.com/62339931/212866562-6b8994f8-3445-4a8e-ad2e-c9aa595f5679.png" width="400" height="300"/>
-A new Flutter project.
 
 ## Getting Started
 
