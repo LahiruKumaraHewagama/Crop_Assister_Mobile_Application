@@ -37,7 +37,7 @@ class _SignInState extends State<SignIn> {
         ? const Loading()
         : Scaffold(
             backgroundColor: Color.fromARGB(255, 250, 250, 250),
-            resizeToAvoidBottomInset: false, 
+            resizeToAvoidBottomInset: false,
             // appBar: AppBar(
             //   title: const Text('Sign In to Crop Assister'),
             //   backgroundColor: const Color.fromARGB(255, 71, 143, 75),
@@ -59,50 +59,84 @@ class _SignInState extends State<SignIn> {
               child: !otpVisibility
                   ? Form(
                       key: _formKey_1,
-                      child: Column(
-                        children: <Widget>[
-                          // const SizedBox(height: 30.0),
-                          Image.network(
-                              'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
-                          const SizedBox(height: 20.0),
-                          const Text('SIGN IN',
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            // const SizedBox(height: 30.0),
+                            Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
+                            const SizedBox(height: 20.0),
+                            const Text('SIGN IN',
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 30,
+                                    color: Color.fromARGB(255, 4, 92, 9))),
+                            const SizedBox(height: 30.0),
+                            TextFormField(
+                              keyboardType: TextInputType.phone,
+                              decoration: textInputDecoration.copyWith(
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
+                                  hintText: 'Mobile Number'),
+                              validator: (val) =>
+                                  val!.isEmpty ? 'Enter a Mobile Number' : null,
+                              onChanged: (val) {
+                                setState(() => phone_no = val);
+                                setState(() => error = "");
+                              },
+                            ),
+                            const SizedBox(height: 5.0),
+                            Text(
+                              error,
+                              style: const TextStyle(
+                                  color: Colors.red, fontSize: 14.0),
+                            ),
+                            const SizedBox(height: 10.0),
+                            ElevatedButton(
+                                child: const Text('Sign In'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color.fromARGB(
+                                      255, 71, 143, 75), // background
+                                  onPrimary: Colors.white, // foreground
+                                  textStyle: const TextStyle(fontSize: 20),
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(20.0),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 55.0),
+                                ),
+                                onPressed: () async {
+                                  if (_formKey_1.currentState != null &&
+                                      _formKey_1.currentState!.validate()) {
+                                    setState(() {
+                                      loading = true;
+                                    });
+                                    loginWithPhone();
+                                  }
+                                }),
+                            const SizedBox(height: 40.0),
+                            Text(
                               style: TextStyle(
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 30,
-                                  color: Color.fromARGB(255, 4, 92, 9))),
-                          const SizedBox(height: 30.0),
-                          TextFormField(
-                            keyboardType: TextInputType.phone,
-                            decoration: textInputDecoration.copyWith(
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                hintText: 'Mobile Number'),
-                            validator: (val) =>
-                                val!.isEmpty ? 'Enter a Mobile Number' : null,
-                            onChanged: (val) {
-                              setState(() => phone_no = val);
-                              setState(() => error = "");
-                            },
-                          ),
-                          const SizedBox(height: 5.0),                
-                            Text(
-                            error,
-                            style: const TextStyle(
-                                color: Colors.red, fontSize: 14.0),
-                          ),
-                          const SizedBox(height: 10.0),
-                          ElevatedButton(
-                              child: const Text('Sign In'),
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 4, 92, 9)),
+                              'or', //title
+                              textAlign: TextAlign.end, //aligment
+                            ),
+                            const SizedBox(height: 40.0),
+                            ElevatedButton(
+                              child: const Text('Sign Up'),
                               style: ElevatedButton.styleFrom(
                                 primary: const Color.fromARGB(
                                     255, 71, 143, 75), // background
@@ -112,55 +146,23 @@ class _SignInState extends State<SignIn> {
                                   borderRadius: new BorderRadius.circular(20.0),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 55.0),
+                                    vertical: 10.0, horizontal: 50.0),
                               ),
-                              onPressed: () async {
-                                if (_formKey_1.currentState != null &&
-                                    _formKey_1.currentState!.validate()) {
-                                  setState(() {
-                                    loading = true;
-                                  });
-                                  loginWithPhone();
-                                }
-                              }),
-                          const SizedBox(height: 40.0),
-                          Text(
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 4, 92, 9)),
-                            'or', //title
-                            textAlign: TextAlign.end, //aligment
-                          ),
-                          const SizedBox(height: 40.0),
-                          ElevatedButton(
-                            child: const Text('Sign Up'),
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(
-                                  255, 71, 143, 75), // background
-                              onPrimary: Colors.white, // foreground
-                              textStyle: const TextStyle(fontSize: 20),
-                              shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(20.0),
+                              onPressed: () => widget.toggleView(2),
+                            ),
+                            TextButton(
+                              child: Text(
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 10,
+                                    color: Color.fromARGB(255, 4, 92, 9)),
+                                'Don\'t have an account? Create new one', //title
+                                textAlign: TextAlign.end, //aligment
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 50.0),
+                              onPressed: () => widget.toggleView(2),
                             ),
-                            onPressed: () => widget.toggleView(2),
-                          ),
-                          TextButton(
-                            child: Text(
-                              style: TextStyle(
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 10,
-                                  color: Color.fromARGB(255, 4, 92, 9)),
-                              'Don\'t have an account? Create new one', //title
-                              textAlign: TextAlign.end, //aligment
-                            ),
-                            onPressed: () => widget.toggleView(2),
-                          ),
-                        
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   : Form(
