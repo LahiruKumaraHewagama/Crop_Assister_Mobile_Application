@@ -235,6 +235,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void loginWithPhone() async {
+    auth_in.setSettings(appVerificationDisabledForTesting: true);
     auth_in.verifyPhoneNumber(
       phoneNumber: phone_no,
       verificationCompleted: (PhoneAuthCredential credential) async {

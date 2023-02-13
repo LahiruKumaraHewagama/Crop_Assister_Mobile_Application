@@ -259,6 +259,7 @@ class _SignInState extends State<SignIn> {
   }
 
   void loginWithPhone() async {
+    await auth_in.setSettings(appVerificationDisabledForTesting: true);
     auth_in.verifyPhoneNumber(
       phoneNumber: phone_no,
       verificationCompleted: (PhoneAuthCredential credential) async {

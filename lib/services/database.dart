@@ -9,6 +9,8 @@ import 'package:crop_damage_assessment_app/models/claim.dart';
 import 'package:crop_damage_assessment_app/models/user.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import '../screens/farmer/home/farmer_dashboard.dart';
+
 class DatabaseService {
   final String? uid;
   late String? select_uid;
@@ -245,6 +247,17 @@ class DatabaseService {
         .snapshots()
         .map(_claimDataFromSnapshot);
   }
+
+Future<int> farmerClaimCount(String? select_claim_state) async {
+  var respectsQuery = FirebaseFirestore.instance
+      .collection('claim')
+      .where('uid', isEqualTo: select_uid)
+      .where('status', isEqualTo: select_claim_state);
+  var querySnapshot = await respectsQuery.get();
+  var totalEquals = querySnapshot.docs.length;
+  // print(totalEquals);
+  return totalEquals;
+}
 
   Stream<List<Claim?>> officerClaimList(
       String? select_claim_state, String? select_agrarian_division) {

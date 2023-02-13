@@ -52,13 +52,18 @@ class _HomeState extends State<Home> {
 
             switch (user?.type) {
               case 'farmer':
-                return FarmerDashboard(uid: user_auth?.uid);         
+                return FarmerDashboard(uid: user_auth?.uid);        
+
+              case 'admin':
+                return AdminDashboard(uid: user_auth?.uid);
+              case 'officer':
+                return OfficerDashboard(uid: user_auth?.uid);
 
               default:
                 return FarmerAddData(uid: user_auth?.uid, phone_no: user_auth?.phone_no);
             }
           } else {
-            return const Loading();
+            return FarmerAddData(uid: user_auth?.uid, phone_no: user_auth?.phone_no);
           }
         });
   }
