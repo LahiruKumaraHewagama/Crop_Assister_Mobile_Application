@@ -150,6 +150,22 @@ class _SignInState extends State<SignIn> {
                               ),
                               onPressed: () => widget.toggleView(2),
                             ),
+                            const SizedBox(height: 40.0),
+                            ElevatedButton(
+                              child: const Text('Officer Sign In'),
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color.fromARGB(
+                                    255, 71, 143, 75), // background
+                                onPrimary: Colors.white, // foreground
+                                textStyle: const TextStyle(fontSize: 20),
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(20.0),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 50.0),
+                              ),
+                              onPressed: () => widget.toggleView(3),
+                            ),
                             TextButton(
                               child: Text(
                                 style: TextStyle(

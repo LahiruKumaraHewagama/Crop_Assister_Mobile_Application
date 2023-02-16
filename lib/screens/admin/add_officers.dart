@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,13 +22,14 @@ class AddOfficer extends StatefulWidget {
 
 class _AddOfficerState extends State<AddOfficer> {
   final AuthService _auth = AuthService();
+  final FirebaseAuth auth_in = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
   String error = "";
   bool loading = false;
 
   // text field state
-  String phone_no='';
+  String phone_no = '';
   String name = "";
   String type = "officer";
   String email = "";
@@ -87,7 +89,6 @@ class _AddOfficerState extends State<AddOfficer> {
               backgroundColor: const Color.fromARGB(255, 105, 184, 109),
               elevation: 0.0,
               actions: <Widget>[
-
                 // TextButton.icon(
                 //     icon: const Icon(Icons.person),
                 //     label: const Text('Farmer'),
@@ -103,248 +104,253 @@ class _AddOfficerState extends State<AddOfficer> {
                 // ),
 
                 IconButton(
-                  icon: const Icon(Icons.power_settings_new),
-                  onPressed: () async {
-                    await _auth.signoutUser(widget.key, context);
-                  }
-                ),
-
+                    icon: const Icon(Icons.power_settings_new),
+                    onPressed: () async {
+                      await _auth.signoutUser(widget.key, context);
+                    }),
               ],
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 50.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
                       const SizedBox(height: 20.0),
-                     TextFormField(
-                              keyboardType: TextInputType.phone,
-                              decoration: textInputDecoration.copyWith(
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 0, 129, 32)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 0, 129, 32)),
-                                  ),
-                                  hintText: 'Mobile Number'),
-                              validator: (val) =>
-                                  val!.isEmpty ? 'Enter a Mobile Number' : null,
-                              onChanged: (val) {
-                                setState(() => phone_no = val);
-                                setState(() => error = "");
-                              },
-                            ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      keyboardType: TextInputType.name,
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Officer Name'),
-                      validator: (val) =>
-                          val!.isEmpty ? 'Enter officer name' : null,
-                      onChanged: (val) {
-                        setState(() => name = val);
-                        setState(() => error = "");
-                      },
-                    ),
-
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Officer Email'),
-                      validator: (val) =>
-                          val!.isEmpty ? 'Enter officer email' : null,
-                      onChanged: (val) {
-                        setState(() => email = val);
-                        setState(() => error = "");
-                      },
-                    ),
-                    const SizedBox(height: 20.0),
-                    Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                      if (textEditingValue.text == '') {
-                        return const Iterable<String>.empty();
-                      }
-                      return _agrarianDivisionOptions.where((String option) {
-                        return option
-                            .contains(textEditingValue.text.toLowerCase());
-                      });
-                    }, fieldViewBuilder: (BuildContext context,
-                            TextEditingController fieldTextEditingController,
-                            FocusNode fieldFocusNode,
-                            VoidCallback onFieldSubmitted) {
-                      return TextFormField(
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
-                        keyboardType: TextInputType.text,
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
                         decoration: textInputDecoration.copyWith(
-                            hintText: 'Agrarian Division'),
-                        validator: (val) => agrarian_division.isEmpty
-                            ? 'Select officer agrarian division'
-                            : null,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Mobile Number'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter a Mobile Number' : null,
                         onChanged: (val) {
-                          setState(() => agrarian_division = "");
+                          setState(() => phone_no = val);
                           setState(() => error = "");
                         },
-                      );
-                    }, onSelected: (String selection) {
-                      setState(() => agrarian_division = selection);
-                      setState(() => error = "");
-                      // debugPrint('You just selected $selection');
-                    }),
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        keyboardType: TextInputType.name,
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Officer Name'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter officer name' : null,
+                        onChanged: (val) {
+                          setState(() => name = val);
+                          setState(() => error = "");
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Officer Email'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter officer email' : null,
+                        onChanged: (val) {
+                          setState(() => email = val);
+                          setState(() => error = "");
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      Autocomplete<String>(
+                          optionsBuilder: (TextEditingValue textEditingValue) {
+                        // return _agrarianDivisionOptions
+                        //   .where((String continent) => continent.toLowerCase()
+                        //     .startsWith(textEditingValue.text.toLowerCase())
+                        //   )
+                        //   .toList();
 
-                    
-                    const SizedBox(height: 20.0),
-                    Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                      if (textEditingValue.text == '') {
-                        return const Iterable<String>.empty();
-                      }
-                      return _provinceOptions.where((String option) {
-                        return option
-                            .contains(textEditingValue.text.toLowerCase());
-                      });
-                    }, fieldViewBuilder: (BuildContext context,
-                            TextEditingController fieldTextEditingController,
-                            FocusNode fieldFocusNode,
-                            VoidCallback onFieldSubmitted) {
-                      return TextFormField(
-                        controller: fieldTextEditingController,
-                        focusNode: fieldFocusNode,
+                        if (textEditingValue.text == '') {
+                          return const Iterable<String>.empty();
+                        }
+                        return _agrarianDivisionOptions.where((String option) {
+                          return option
+                              .contains(textEditingValue.text.toLowerCase());
+                        });
+                      }, fieldViewBuilder: (BuildContext context,
+                              TextEditingController fieldTextEditingController,
+                              FocusNode fieldFocusNode,
+                              VoidCallback onFieldSubmitted) {
+                        return TextFormField(
+                          controller: fieldTextEditingController,
+                          focusNode: fieldFocusNode,
+                          keyboardType: TextInputType.text,
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Agrarian Division'),
+                          validator: (val) => agrarian_division.isEmpty
+                              ? 'Select your agrarian division'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => agrarian_division = "");
+                            setState(() => error = "");
+                          },
+                        );
+                      }, onSelected: (String selection) {
+                        setState(() => agrarian_division = selection);
+                        setState(() => error = "");
+                        // debugPrint('You just selected $selection');
+                      }),
+                      const SizedBox(height: 20.0),
+                      Autocomplete<String>(
+                          optionsBuilder: (TextEditingValue textEditingValue) {
+                        if (textEditingValue.text == '') {
+                          return const Iterable<String>.empty();
+                        }
+                        return _provinceOptions.where((String option) {
+                          return option
+                              .contains(textEditingValue.text.toLowerCase());
+                        });
+                      }, fieldViewBuilder: (BuildContext context,
+                              TextEditingController fieldTextEditingController,
+                              FocusNode fieldFocusNode,
+                              VoidCallback onFieldSubmitted) {
+                        return TextFormField(
+                          controller: fieldTextEditingController,
+                          focusNode: fieldFocusNode,
+                          keyboardType: TextInputType.text,
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Province'),
+                          validator: (val) => province.isEmpty
+                              ? 'Select officer province'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => province = "");
+                            setState(() => error = "");
+                          },
+                        );
+                      }, onSelected: (String selection) {
+                        setState(() => province = selection);
+                        setState(() => error = "");
+                        // debugPrint('You just selected $selection');
+                      }),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
                         keyboardType: TextInputType.text,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Province'),
+                            textInputDecoration.copyWith(hintText: 'NIC'),
                         validator: (val) =>
-                            province.isEmpty ? 'Select officer province' : null,
+                            val!.isEmpty ? 'Enter your nic' : null,
                         onChanged: (val) {
-                          setState(() => province = "");
+                          setState(() => nic = val);
                           setState(() => error = "");
                         },
-                      );
-                    }, onSelected: (String selection) {
-                      setState(() => province = selection);
-                      setState(() => error = "");
-                      // debugPrint('You just selected $selection');
-                    }),
-
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                          keyboardType: TextInputType.text,
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'NIC'),
-                          validator: (val) =>
-                              val!.isEmpty ? 'Enter your nic' : null,
-                          onChanged: (val) {
-                            setState(() => nic = val);
-                            setState(() => error = "");
-                          },
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        keyboardType: TextInputType.streetAddress,
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Address'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter your address' : null,
+                        onChanged: (val) {
+                          setState(() => address = val);
+                          setState(() => error = "");
+                        },
+                      ),
+                      const SizedBox(height: 40.0),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Profile Image',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Color.fromARGB(255, 32, 196, 100)),
                         ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                          keyboardType: TextInputType.streetAddress,
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Address'),
-                          validator: (val) =>
-                              val!.isEmpty ? 'Enter your address' : null,
-                          onChanged: (val) {
-                            setState(() => address = val);
-                            setState(() => error = "");
-                          },
-                        ),
-
-                    const SizedBox(height: 40.0),
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Profile Image',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Color.fromARGB(255, 32, 196, 100)),
-                          ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          // ignore: unnecessary_null_comparison
-                          child: profile_image != null
-                              ? Image.file(File(profile_image!.path))
-                              : TextButton(
-                                  child: const Icon(
-                                    Icons.add_a_photo,
-                                    size: 50,
-                                  ),
-                                  onPressed: pickImage,
+                      ),
+                      const SizedBox(height: 20.0),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(30.0),
+                        // ignore: unnecessary_null_comparison
+                        child: profile_image != null
+                            ? Image.file(File(profile_image!.path))
+                            : TextButton(
+                                child: const Icon(
+                                  Icons.add_a_photo,
+                                  size: 50,
                                 ),
-                        ),
+                                onPressed: pickImage,
+                              ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      ElevatedButton(
+                          child: const Text('Submit'),
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color.fromARGB(
+                                255, 71, 143, 75), // background
+                            onPrimary: Colors.white, // foreground
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
+                              setState(() {
+                                loading = true;
+                              });
 
-                    const SizedBox(height: 20.0),
-                    ElevatedButton(
-                        child: const Text('Submit'),
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(
-                              255, 71, 143, 75), // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState != null &&
-                              _formKey.currentState!.validate()) {
-                            setState(() {
-                              loading = true;
-                            });
+                              DatabaseService db =
+                                  DatabaseService(uid: widget.uid);
+                              String profile_url = "";
+                              if (profile_image == null) {
+                                profile_url =
+                                    "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
+                              } else {
+                                profile_url = await db.uploadFileToFirebase(
+                                    "profile", "profile_", profile_image);
+                              }
 
-                            DatabaseService db = DatabaseService(uid: widget.uid);
-                            String profile_url = "";
-                            if (profile_image == null) {
-                              profile_url = "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
-                            } else {
-                              profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
-                            }
-                            
-                            var user_data = {
-                              "uid": phone_no,
-                              "phone_no": phone_no,
-                              "name": name,
-                              "email": email,
-                              "type": type,
-                              "agrarian_division": agrarian_division,
-                              "nic": nic,
-                              "address": address,
-                              "province": province,
-                              "profile_url": profile_url
-                            };
+                              var user_data = {
+                                "uid": phone_no,
+                                "phone_no": phone_no,
+                                "name": name,
+                                "email": email,
+                                "type": type,
+                                "agrarian_division": agrarian_division,
+                                "nic": nic,
+                                "address": address,
+                                "province": province,
+                                "profile_url": profile_url
+                              };
 
-                            bool isSuccess = await db.updateUserData(user_data);                              
+                              bool isSuccess =
+                                  await db.updateUserData(user_data);
                               setState(() {
                                 loading = false;
                               });
 
                               if (isSuccess) {
-                                Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) => Wrapper(key: widget.key)));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Wrapper(key: widget.key)));
                               } else {
                                 triggerErrorAlert(context);
                               }
-
-                          }
-                        }),
-                    const SizedBox(height: 12.0),
-                    Text(
-                      error,
-                      style: const TextStyle(color: Colors.red, fontSize: 14.0),
-                    )
-                  ],
-                ),
-              )
-            )
-          );
+                            }
+                          }),
+                      const SizedBox(height: 12.0),
+                      Text(
+                        error,
+                        style:
+                            const TextStyle(color: Colors.red, fontSize: 14.0),
+                      )
+                    ],
+                  ),
+                )));
   }
 }
