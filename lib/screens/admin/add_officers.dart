@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:image_picker/image_picker.dart';
@@ -313,8 +314,11 @@ class _AddOfficerState extends State<AddOfficer> {
                                     "profile", "profile_", profile_image);
                               }
 
+                              UserCredential? result =
+                                  await register(email, nic);
+
                               var user_data = {
-                                "uid": phone_no,
+                                "uid": result!.user!.uid,
                                 "phone_no": phone_no,
                                 "name": name,
                                 "email": email,
@@ -326,8 +330,8 @@ class _AddOfficerState extends State<AddOfficer> {
                                 "profile_url": profile_url
                               };
 
-                              bool isSuccess =
-                                  await db.updateUserData(user_data);
+                              bool isSuccess = await db.updateOfficerData(
+                                  result.user!.uid, user_data);
                               setState(() {
                                 loading = false;
                               });
@@ -338,6 +342,7 @@ class _AddOfficerState extends State<AddOfficer> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             Wrapper(key: widget.key)));
+                                print("succesful user adding");
                               } else {
                                 triggerErrorAlert(context);
                               }
@@ -352,5 +357,23 @@ class _AddOfficerState extends State<AddOfficer> {
                     ],
                   ),
                 )));
+  }
+
+  static Future<UserCredential?> register(String email, String password) async {
+    FirebaseApp app = await Firebase.initializeApp(
+        name: 'Secondary', options: Firebase.app().options);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instanceFor(app: app)
+          .createUserWithEmailAndPassword(email: email, password: password);
+      await app.delete();
+      return Future.sync(() => userCredential);
+    } on FirebaseAuthException catch (e) {
+      // Do something with exception. This try/catch is here to make sure
+      // that even if the user creation fails, app.delete() runs, if is not,
+      // next time Firebase.initializeApp() will fail as the previous one was
+      // not deleted.
+      await app.delete();
+      return null;
+    }
   }
 }

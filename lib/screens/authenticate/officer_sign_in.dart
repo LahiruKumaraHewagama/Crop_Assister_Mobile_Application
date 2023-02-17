@@ -157,6 +157,9 @@ class _OfficerSignInState extends State<OfficerSignIn> {
       await auth_in.signInWithEmailAndPassword(
           email: email, password: password);
       print("You are logged in successfully");
+      setState(() {
+        loading = false;
+      });
     } catch (e) {
       print(e);
       setState(() {

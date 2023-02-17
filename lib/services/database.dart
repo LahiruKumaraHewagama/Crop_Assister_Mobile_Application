@@ -239,6 +239,7 @@ class DatabaseService {
       return downloadURL;
     }
   }
+
   Stream<List<Claim?>> farmerClaimList(String? select_claim_state) {
     return claim_collection
         .orderBy('timestamp', descending: true)
@@ -248,16 +249,16 @@ class DatabaseService {
         .map(_claimDataFromSnapshot);
   }
 
-Future<int> farmerClaimCount(String? select_claim_state) async {
-  var respectsQuery = FirebaseFirestore.instance
-      .collection('claim')
-      .where('uid', isEqualTo: select_uid)
-      .where('status', isEqualTo: select_claim_state);
-  var querySnapshot = await respectsQuery.get();
-  var totalEquals = querySnapshot.docs.length;
-  // print(totalEquals);
-  return totalEquals;
-}
+  Future<int> farmerClaimCount(String? select_claim_state) async {
+    var respectsQuery = FirebaseFirestore.instance
+        .collection('claim')
+        .where('uid', isEqualTo: select_uid)
+        .where('status', isEqualTo: select_claim_state);
+    var querySnapshot = await respectsQuery.get();
+    var totalEquals = querySnapshot.docs.length;
+    // print(totalEquals);
+    return totalEquals;
+  }
 
   Stream<List<Claim?>> officerClaimList(
       String? select_claim_state, String? select_agrarian_division) {
