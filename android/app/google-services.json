@@ -9,10 +9,18 @@
       "client_info": {
         "mobilesdk_app_id": "1:578822898762:android:d41e5bfed6efd8f96d92b3",
         "android_client_info": {
-          "package_name": "com.example.crop_assister"
+          "package_name": "com.example.crop_damage_assessment_app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "578822898762-gsog2b3l6164oqlsq6dscnb2blegt2uk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.crop_damage_assessment_app",
+            "certificate_hash": "8d495b6ab38d7d914253d9b8367b1d02bc055d7e"
+          }
+        },
         {
           "client_id": "578822898762-5dc9ecpdej6hrk2e46ip50dd7ju0pk3n.apps.googleusercontent.com",
           "client_type": 3

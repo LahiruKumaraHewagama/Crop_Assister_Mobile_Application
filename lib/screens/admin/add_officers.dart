@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,40 +9,35 @@ import 'package:crop_damage_assessment_app/screens/wrapper.dart';
 import 'package:crop_damage_assessment_app/services/database.dart';
 import 'package:crop_damage_assessment_app/components/loading.dart';
 import 'package:crop_damage_assessment_app/components/decoration.dart';
-import 'package:crop_damage_assessment_app/screens/officer/add_officer.dart';
+import 'package:crop_damage_assessment_app/screens/farmer/sign_up_farmer.dart';
 
-class FarmerAddData extends StatefulWidget {
-  const FarmerAddData({Key? key, required this.uid, required this.phone_no})
-      : super(key: key);
+class AddOfficer extends StatefulWidget {
+  const AddOfficer({Key? key, this.uid, this.phone_no}) : super(key: key);
 
   final String? uid;
   final String? phone_no;
 
   @override
-  _FarmerAddDataState createState() => _FarmerAddDataState();
+  _AddOfficerState createState() => _AddOfficerState();
 }
 
-class _FarmerAddDataState extends State<FarmerAddData> {
+class _AddOfficerState extends State<AddOfficer> {
   final AuthService _auth = AuthService();
+  final FirebaseAuth auth_in = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
   String error = "";
   bool loading = false;
 
   // text field state
+  String phone_no = '';
   String name = "";
-  String type = "farmer";
+  String type = "officer";
   String email = "";
-
   String agrarian_division = "";
+  String province = "";
   String nic = "";
   String address = "";
-  String province = "";
-
-  String bank = "";
-  String account_name = "";
-  String account_no = "";
-  String branch = "";
 
   XFile? profile_image;
 
@@ -89,31 +86,29 @@ class _FarmerAddDataState extends State<FarmerAddData> {
             backgroundColor: const Color.fromARGB(255, 242, 255, 243),
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              title: const Text('Farmer - Registraion'),
+              title: const Text('Officer - Registraion'),
               backgroundColor: const Color.fromARGB(255, 105, 184, 109),
               elevation: 0.0,
               actions: <Widget>[
-
-                TextButton.icon(
-                    icon: const Icon(Icons.person),
-                    label: const Text('Officer'),
-                    style: TextButton.styleFrom(
-                      primary: Colors.white, // foreground
-                    ),
-                    onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute( builder: (context) => OfficerAddData(uid: widget.uid, phone_no: widget.phone_no))
-                        );
-                    }
-                ),
+                // TextButton.icon(
+                //     icon: const Icon(Icons.person),
+                //     label: const Text('Farmer'),
+                //     style: TextButton.styleFrom(
+                //       primary: Colors.white, // foreground
+                //     ),
+                //     onPressed: () async {
+                //         Navigator.pushReplacement(
+                //           context,
+                //           MaterialPageRoute( builder: (context) => FarmerAddData(uid: widget.uid, phone_no: widget.phone_no))
+                //         );
+                //     }
+                // ),
 
                 IconButton(
-                  icon: const Icon(Icons.power_settings_new),
-                  onPressed: () async {
-                    await _auth.signoutUser(widget.key, context);
-                  }
-                )
+                    icon: const Icon(Icons.power_settings_new),
+                    onPressed: () async {
+                      await _auth.signoutUser(widget.key, context);
+                    }),
               ],
             ),
             body: SingleChildScrollView(
@@ -123,24 +118,37 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Peronal Details',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 32, 196, 100)),
-                        ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Mobile Number'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter a Mobile Number' : null,
+                        onChanged: (val) {
+                          setState(() => phone_no = val);
+                          setState(() => error = "");
+                        },
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.name,
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Name'),
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Officer Name'),
                         validator: (val) =>
-                            val!.isEmpty ? 'Enter your name' : null,
+                            val!.isEmpty ? 'Enter officer name' : null,
                         onChanged: (val) {
                           setState(() => name = val);
                           setState(() => error = "");
@@ -149,10 +157,10 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Email'),
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Officer Email'),
                         validator: (val) =>
-                            val!.isEmpty ? 'Enter your email' : null,
+                            val!.isEmpty ? 'Enter officer email' : null,
                         onChanged: (val) {
                           setState(() => email = val);
                           setState(() => error = "");
@@ -198,6 +206,39 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                         // debugPrint('You just selected $selection');
                       }),
                       const SizedBox(height: 20.0),
+                      Autocomplete<String>(
+                          optionsBuilder: (TextEditingValue textEditingValue) {
+                        if (textEditingValue.text == '') {
+                          return const Iterable<String>.empty();
+                        }
+                        return _provinceOptions.where((String option) {
+                          return option
+                              .contains(textEditingValue.text.toLowerCase());
+                        });
+                      }, fieldViewBuilder: (BuildContext context,
+                              TextEditingController fieldTextEditingController,
+                              FocusNode fieldFocusNode,
+                              VoidCallback onFieldSubmitted) {
+                        return TextFormField(
+                          controller: fieldTextEditingController,
+                          focusNode: fieldFocusNode,
+                          keyboardType: TextInputType.text,
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Province'),
+                          validator: (val) => province.isEmpty
+                              ? 'Select officer province'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => province = "");
+                            setState(() => error = "");
+                          },
+                        );
+                      }, onSelected: (String selection) {
+                        setState(() => province = selection);
+                        setState(() => error = "");
+                        // debugPrint('You just selected $selection');
+                      }),
+                      const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
                         decoration:
@@ -218,105 +259,6 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                             val!.isEmpty ? 'Enter your address' : null,
                         onChanged: (val) {
                           setState(() => address = val);
-                          setState(() => error = "");
-                        },
-                      ),
-                      const SizedBox(height: 20.0),
-                      Autocomplete<String>(
-                          optionsBuilder: (TextEditingValue textEditingValue) {
-                        // return _provinceOptions
-                        //   .where((String continent) => continent.toLowerCase()
-                        //     .startsWith(textEditingValue.text.toLowerCase())
-                        //   )
-                        //   .toList();
-
-                        if (textEditingValue.text == '') {
-                          return const Iterable<String>.empty();
-                        }
-                        return _provinceOptions.where((String option) {
-                          return option
-                              .contains(textEditingValue.text.toLowerCase());
-                        });
-                      }, fieldViewBuilder: (BuildContext context,
-                              TextEditingController fieldTextEditingController,
-                              FocusNode fieldFocusNode,
-                              VoidCallback onFieldSubmitted) {
-                        return TextFormField(
-                          controller: fieldTextEditingController,
-                          focusNode: fieldFocusNode,
-                          keyboardType: TextInputType.text,
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Province'),
-                          validator: (val) =>
-                              province.isEmpty ? 'Select your province' : null,
-                          onChanged: (val) {
-                            setState(() => province = "");
-                            setState(() => error = "");
-                          },
-                        );
-                      }, onSelected: (String selection) {
-                        setState(() => province = selection);
-                        setState(() => error = "");
-                        // debugPrint('You just selected $selection');
-                      }),
-                      const SizedBox(height: 40.0),
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Bank Details',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 32, 196, 100)),
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Bank Name'),
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter your bank name' : null,
-                        onChanged: (val) {
-                          setState(() => account_name = val);
-                          setState(() => error = "");
-                        },
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
-                            hintText: 'Name in Bank Account'),
-                        validator: (val) => val!.isEmpty
-                            ? 'Enter your name in bank account'
-                            : null,
-                        onChanged: (val) {
-                          setState(() => bank = val);
-                          setState(() => error = "");
-                        },
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
-                            hintText: 'Account No'),
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter your account no' : null,
-                        onChanged: (val) {
-                          setState(() => account_no = val);
-                          setState(() => error = "");
-                        },
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
-                            hintText: 'Branch Name'),
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter your branch name' : null,
-                        onChanged: (val) {
-                          setState(() => branch = val);
                           setState(() => error = "");
                         },
                       ),
@@ -355,48 +297,52 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                             onPrimary: Colors.white, // foreground
                           ),
                           onPressed: () async {
-                            // print("agrarian_division {$agrarian_division}");
-                            
-
-                            if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
                               setState(() {
                                 loading = true;
                               });
-                              DatabaseService db = DatabaseService(uid: widget.uid);
-                              String profile_url = "";
 
+                              DatabaseService db =
+                                  DatabaseService(uid: widget.uid);
+                              String profile_url = "";
                               if (profile_image == null) {
-                                profile_url = "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
+                                profile_url =
+                                    "https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833";
                               } else {
-                                print(profile_image == null);
-                                profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
+                                profile_url = await db.uploadFileToFirebase(
+                                    "profile", "profile_", profile_image);
                               }
 
+                              UserCredential? result =
+                                  await register(email, nic);
+
                               var user_data = {
-                                "uid": widget.uid,
+                                "uid": result!.user!.uid,
+                                "phone_no": phone_no,
                                 "name": name,
                                 "email": email,
                                 "type": type,
-                                "phone_no": widget.phone_no,
                                 "agrarian_division": agrarian_division,
                                 "nic": nic,
                                 "address": address,
                                 "province": province,
-                                "bank": bank,
-                                "account_name": account_name,
-                                "account_no": account_no,
-                                "branch": branch,
                                 "profile_url": profile_url
                               };
 
-                              bool isSuccess = await db.updateUserData(user_data);
+                              bool isSuccess = await db.updateOfficerData(
+                                  result.user!.uid, user_data);
                               setState(() {
                                 loading = false;
                               });
 
                               if (isSuccess) {
-                                Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) => Wrapper(key: widget.key)));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Wrapper(key: widget.key)));
+                                print("succesful user adding");
                               } else {
                                 triggerErrorAlert(context);
                               }
@@ -410,7 +356,24 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       )
                     ],
                   ),
-                )),
-          );
+                )));
+  }
+
+  static Future<UserCredential?> register(String email, String password) async {
+    FirebaseApp app = await Firebase.initializeApp(
+        name: 'Secondary', options: Firebase.app().options);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instanceFor(app: app)
+          .createUserWithEmailAndPassword(email: email, password: password);
+      await app.delete();
+      return Future.sync(() => userCredential);
+    } on FirebaseAuthException catch (e) {
+      // Do something with exception. This try/catch is here to make sure
+      // that even if the user creation fails, app.delete() runs, if is not,
+      // next time Firebase.initializeApp() will fail as the previous one was
+      // not deleted.
+      await app.delete();
+      return null;
+    }
   }
 }

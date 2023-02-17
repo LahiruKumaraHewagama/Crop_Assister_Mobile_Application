@@ -13,6 +13,8 @@ import 'claim_dashboard.dart';
 import 'edit_farmer.dart';
 
 class FarmerDashboard extends StatefulWidget {
+
+
  
   const FarmerDashboard({Key? key,required this.uid}) : super(key: key);
 
@@ -26,11 +28,36 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
   final AuthService _auth = AuthService();
 
   late DatabaseService db;
+
   bool loading = true;
+     int approve=0;
+    int reject=0;
+     int pending=0;
   final NotificationService notificationservice = NotificationService();
   int ncount = 0;
   List<dynamic> _notifications = [];
   List<NotificationModel> notification_list = [];
+
+  void initFarmerDash() async {
+    db = DatabaseService(uid: widget.uid);
+    db.set_select_uid = widget.uid!;
+
+    approve = await  db.farmerClaimCount('Approve');
+    pending = await  db.farmerClaimCount('Pending');
+    reject = await  db.farmerClaimCount('Reject');     
+    loading = false;
+     setState(() {
+            pending = pending;
+            approve=approve;
+            reject=reject;          
+    });   
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initFarmerDash();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +165,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+              const SizedBox(height: 10.0),
             ListTile(             
 
               title: Text("YOUR CLAIMS",
@@ -151,34 +179,128 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                 crossAxisAlignment :CrossAxisAlignment.center,
                 children: <Widget>[
                    
-                   const SizedBox(width: 10.0),
+                   const SizedBox(width: 5.0),
+                   
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment :CrossAxisAlignment.center,
+                children: <Widget>[
+                   
+                   const SizedBox(height: 10.0),
+                   
                    
                   Align(
                     alignment: Alignment.center,                                        
                     child: const Icon(Icons.check,color:Color.fromARGB(255, 0, 153, 8),size: 40,),
                     
                   ),
-                  const SizedBox(width: 50.0),
-                  Align(
-                    alignment: Alignment.center,
-                    child: const Icon(Icons.close ,color:Color.fromARGB(255, 219, 0, 0),size: 40, ),
-                  ),
-                   const SizedBox(width: 50.0),
-                   Align(
-                    alignment: Alignment.center,
-                    child: const Icon(Icons.rotate_right_sharp,color:Color.fromARGB(255, 182, 154, 0),size: 40,),
-                  ),
+                   const SizedBox(width: 40.0),
+                   Text('Approve',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12,  
+                                  // fontWeight: FontWeight.bold,                                
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),  
+                  const SizedBox(width: 40.0),
+                   Text(approve.toString(),
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16,  
+                                  fontWeight: FontWeight.bold,                                
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),                              
+                 
                 ],
-              ),             
+              ),            
+                  ),
+                  const SizedBox(width: 40.0),
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment :CrossAxisAlignment.center,
+                children: <Widget>[
+                   
+                  const SizedBox(height: 10.0),
+                   
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: const Icon(Icons.close ,color:Color.fromARGB(255, 219, 0, 0),size: 40, ),                  
+                    
+                  ),
+                   const SizedBox(width: 40.0),
+                   Text('Reject',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12,  
+                                  // fontWeight: FontWeight.bold,                                
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),  
+                  const SizedBox(width: 40.0),
+                   Text(reject.toString(),
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16,  
+                                  fontWeight: FontWeight.bold,                                
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),                              
+                 
+                ],
+              ),            
+                  ),
+
+
+                 const SizedBox(width: 40.0),
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment :CrossAxisAlignment.center,
+                children: <Widget>[
+                   
+              const SizedBox(height: 10.0),
+                  Align(
+                    alignment: Alignment.center,                                        
+                    child: const Icon(Icons.rotate_right_sharp,color:Color.fromARGB(255, 182, 154, 0),size: 40,),
+                    
+                  ),
+                   const SizedBox(width: 40.0),
+                   Text('Pending',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12,  
+                                  // fontWeight: FontWeight.bold,                                
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),  
+                  const SizedBox(width: 40.0),
+                   Text(pending.toString(),
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16,    
+                                  fontWeight: FontWeight.bold,                              
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                                  textAlign:TextAlign.center),                              
+                 
+                ],
+              ),            
+                  ),
+                  
+                ],
+              ), 
+                        
                            
             ),
+              const SizedBox(height: 20.0) 
           ],
         ),
       ),
     ), const SizedBox(height: 25.0),
                           ElevatedButton(
                              child: const Text('GET START'),
-                            style: ElevatedButton.styleFrom(
+                             style: ElevatedButton.styleFrom(
                               primary: const Color.fromARGB(
                                   255, 71, 143, 75), // background
                               onPrimary: Colors.white, // foreground
@@ -187,7 +309,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                                 borderRadius: new BorderRadius.circular(20.0),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 50.0),
+                                  vertical: 10.0, horizontal: 50.0),
                             ), onPressed: () { 
                                Navigator.push(
                             context,

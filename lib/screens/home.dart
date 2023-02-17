@@ -21,17 +21,15 @@ class Home extends StatefulWidget {
 
   @override
   _HomeState createState() => _HomeState();
-
 }
 
 class _HomeState extends State<Home> {
-
   void initHome() async {
     final preference = await SharedPreferences.getInstance();
     await preference.setString("claim_state", "Pending");
     await preference.setString("agrarian_division", "galle");
   }
-  
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +40,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final user_auth = Provider.of<UserAuth?>(context);
     print('user ${user_auth?.uid}');
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user_auth?.uid).userData,
         builder: (context, snapshot) {
@@ -52,13 +49,20 @@ class _HomeState extends State<Home> {
 
             switch (user?.type) {
               case 'farmer':
-                return FarmerDashboard(uid: user_auth?.uid);         
+                return FarmerDashboard(uid: user_auth?.uid);
+
+              case 'admin':
+                return AdminDashboard(uid: user_auth?.uid);
+              case 'officer':
+                return OfficerDashboard(uid: user_auth?.uid);
 
               default:
-                return FarmerAddData(uid: user_auth?.uid, phone_no: user_auth?.phone_no);
+                return FarmerAddData(
+                    uid: user_auth?.uid, phone_no: user_auth?.phone_no);
             }
           } else {
-            return const Loading();
+            return FarmerAddData(
+                uid: user_auth?.uid, phone_no: user_auth?.phone_no);
           }
         });
   }
