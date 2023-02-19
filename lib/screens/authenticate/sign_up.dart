@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
         ? const Loading()
         : Scaffold(
             backgroundColor: const Color.fromARGB(255, 242, 255, 243),
-            resizeToAvoidBottomInset: false, 
+            resizeToAvoidBottomInset: false,
             // appBar: AppBar(
             //   title: const Text('Sign Up to Crop Assister'),
             //   backgroundColor: const Color.fromARGB(255, 71, 143, 75),
@@ -54,8 +54,10 @@ class _SignUpState extends State<SignUp> {
             //   ],
             // ),
             body: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-              child: !otpVisibility ? Form(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+              child: !otpVisibility
+                  ? Form(
                       key: _formKey_1,
                       child: Column(
                         children: <Widget>[
@@ -69,7 +71,8 @@ class _SignUpState extends State<SignUp> {
                                   fontSize: 30,
                                   color: Color.fromARGB(255, 4, 92, 9))),
                           const SizedBox(height: 30.0),
-                           const Text('Before Sign up to the system you have to verify any of your mobile number which is going to use signup.',
+                          const Text(
+                              'Before Sign up to the system you have to verify any of your mobile number which is going to use signup.',
                               style: TextStyle(
                                   fontStyle: FontStyle.normal,
                                   fontSize: 11,
@@ -78,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                             keyboardType: TextInputType.phone,
                             decoration: textInputDecoration.copyWith(
-                               border: OutlineInputBorder(
+                                border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20.0)),
                                   borderSide: BorderSide(
@@ -100,18 +103,18 @@ class _SignUpState extends State<SignUp> {
                           ),
                           const SizedBox(height: 20.0),
                           ElevatedButton(
-                             child: const Text('Sign Up'),
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(
-                                  255, 71, 143, 75), // background
-                              onPrimary: Colors.white, // foreground
-                              textStyle: const TextStyle(fontSize: 20),
-                              shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(20.0),
+                              child: const Text('Sign Up'),
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color.fromARGB(
+                                    255, 71, 143, 75), // background
+                                onPrimary: Colors.white, // foreground
+                                textStyle: const TextStyle(fontSize: 20),
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(20.0),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 50.0),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 50.0),
-                            ),
                               onPressed: () async {
                                 if (_formKey_1.currentState != null &&
                                     _formKey_1.currentState!.validate()) {
@@ -126,7 +129,8 @@ class _SignUpState extends State<SignUp> {
                             error,
                             style: const TextStyle(
                                 color: Colors.red, fontSize: 14.0),
-                          ),const SizedBox(height: 20.0),
+                          ),
+                          const SizedBox(height: 20.0),
                           TextButton(
                             child: Text(
                               style: TextStyle(

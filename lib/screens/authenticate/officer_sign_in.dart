@@ -37,7 +37,7 @@ class _OfficerSignInState extends State<OfficerSignIn> {
     return loading
         ? const Loading()
         : Scaffold(
-            backgroundColor: const Color.fromARGB(255, 242, 255, 243),
+            // backgroundColor: const Color.fromARGB(255, 242, 255, 243),
             resizeToAvoidBottomInset: false,
             body: Container(
                 padding: const EdgeInsets.symmetric(
@@ -139,10 +139,10 @@ class _OfficerSignInState extends State<OfficerSignIn> {
                         child: Text(
                           style: TextStyle(
                               fontStyle: FontStyle.normal,
-                              fontSize: 15,
+                              fontSize: 20,
                               color: Color.fromARGB(255, 4, 92, 9)),
-                          'Are you a farmer ? SIGN IN', //title
-                          textAlign: TextAlign.end, //aligment
+                          'Are you a farmer ? \nClick Here', //title
+                          textAlign: TextAlign.center, //aligment
                         ),
                         onPressed: () => widget.toggleView(1),
                       ),
