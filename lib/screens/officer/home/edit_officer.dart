@@ -119,7 +119,7 @@ class _OfficerEditDataState extends State<OfficerEditData> {
     return loading
         ? const Loading()
         : Scaffold(
-            backgroundColor: const Color.fromARGB(255, 242, 255, 243),
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: const Text('Edit Profile'),
@@ -160,6 +160,10 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
+                        readOnly: true,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 147, 148, 148)),
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
                         initialValue: email,
@@ -173,10 +177,6 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.phone,
-                        readOnly: true,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 147, 148, 148)),
                         decoration: textInputDecoration.copyWith(
                             hintText: 'Phone Number'),
                         initialValue: phone_no,
@@ -296,16 +296,8 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
-                              color: Color.fromARGB(255, 56, 142, 60)),
+                              color: Color.fromARGB(255, 0, 121, 107)),
                         ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextButton(
-                        child: const Icon(
-                          Icons.add_a_photo,
-                          size: 50,
-                        ),
-                        onPressed: pickImage,
                       ),
                       const SizedBox(height: 10.0),
                       ClipRRect(
@@ -316,12 +308,23 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                               : Image(
                                   image: NetworkImage(profile_network_image))),
                       const SizedBox(height: 20.0),
+                      TextButton(
+                        child: const Icon(
+                          Icons.add_a_photo,
+                          color: Color.fromARGB(255, 0, 121, 107),
+                          size: 50,
+                        ),
+                        onPressed: pickImage,
+                      ),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                           child: const Text('Update'),
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromARGB(
-                                255, 56, 142, 60), // background
-                            onPrimary: Colors.white, // foreground
+                                255, 0, 121, 107), // background
+                            onPrimary: Colors.white,
+
+                            // foreground
                           ),
                           onPressed: () async {
                             if (_formKey.currentState != null &&

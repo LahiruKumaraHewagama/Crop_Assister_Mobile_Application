@@ -37,7 +37,6 @@ class _ClaimProfileState extends State<ClaimView> {
   final List<String> claim_states = ['Pending', 'Approve', 'Reject'];
 
   void initClaimImages() async {
-
     setState(() {
       claim_image_urls_list = widget.claim!.claim_image_urls;
       imageSliders = widget.claim!.claim_image_urls
@@ -98,9 +97,7 @@ class _ClaimProfileState extends State<ClaimView> {
       currentState = widget.claim!.status;
       comment = widget.claim!.comment;
     });
-
   }
-
 
   void triggerSuccessAlert() {
     CoolAlert.show(
@@ -289,7 +286,6 @@ class _ClaimProfileState extends State<ClaimView> {
                           )
                         : Container()),
 
-
                 // const SizedBox(height: 20.0),
                 // const Align(
                 //   alignment: Alignment.centerLeft,
@@ -315,8 +311,6 @@ class _ClaimProfileState extends State<ClaimView> {
                 //         fontSize: 18.0,
                 //         color: Color.fromARGB(255, 62, 62, 62)),
                 //   ),
-
-
 
                 const SizedBox(height: 20.0),
                 const Align(
@@ -362,6 +356,9 @@ class _ClaimProfileState extends State<ClaimView> {
                     child: const Text(
                       'Update',
                       style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 0, 121, 107), // Foreground
                     ),
                     onPressed: () async {
                       setState(() {

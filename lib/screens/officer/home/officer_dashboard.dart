@@ -1,3 +1,4 @@
+import 'package:crop_damage_assessment_app/screens/officer/home/update_password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,12 +104,13 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
                       child: Text('Crop Assister'),
                     ),
                     ListTile(
-                      title: const Text('Settings'),
+                      title: const Text('Update Password'),
                       onTap: () async {
                         final filter_result = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Filter(uid: widget.uid)));
+                                builder: (context) =>
+                                    UpdatePassword(uid: widget.uid)));
 
                         if (filter_result != null && filter_result) {
                           Navigator.pushReplacement(
