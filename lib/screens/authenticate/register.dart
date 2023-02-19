@@ -7,7 +7,8 @@ import 'package:crop_damage_assessment_app/components/loading.dart';
 import 'package:crop_damage_assessment_app/components/decoration.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key, required this.uid, required this.phone_no}) : super(key: key);
+  const Register({Key? key, required this.uid, required this.phone_no})
+      : super(key: key);
 
   final String? uid;
   final String? phone_no;
@@ -21,7 +22,6 @@ class _RegisterState extends State<Register> {
   final FirebaseAuth auth_in = FirebaseAuth.instance;
 
   bool loading = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,41 +46,42 @@ class _RegisterState extends State<Register> {
               ],
             ),
             body: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-              child: Column(
-                children: <Widget>[
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 50.0),
+                child: Column(
+                  children: <Widget>[
                     ElevatedButton(
-                      child: const Text('Register as Farmer'),
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 122, 156, 122), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute( builder: (context) => FarmerAddData(uid: widget.uid, phone_no: widget.phone_no))
-                        );
-                      }
-                    ),
-
+                        child: const Text('Register as Farmer'),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 122, 156, 122), // background
+                          onPrimary: Colors.white, // foreground
+                        ),
+                        onPressed: () async {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FarmerAddData(
+                                      uid: widget.uid,
+                                      phone_no: widget.phone_no)));
+                        }),
                     ElevatedButton(
-                      child: const Text('Register as Officer'),
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 201, 195, 117), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute( builder: (context) => OfficerAddData(uid: widget.uid, phone_no: widget.phone_no))
-                        );
-                      }
-                    ),
-
+                        child: const Text('Register as Officer'),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 0, 121, 107), // background
+                          onPrimary: Colors.white, // foreground
+                        ),
+                        onPressed: () async {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OfficerAddData(
+                                      uid: widget.uid,
+                                      phone_no: widget.phone_no)));
+                        }),
                   ],
-              )
-            ),
+                )),
           );
   }
-
 }

@@ -31,7 +31,8 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
 
     final preference = await SharedPreferences.getInstance();
     filter["claim_state"] = preference.getString('claim_state') ?? "Pending";
-    filter["agrarian_division"] = preference.getString('agrarian_division') ?? "galle";
+    filter["agrarian_division"] =
+        preference.getString('agrarian_division') ?? "galle";
     setState(() {
       loading = false;
     });
@@ -62,14 +63,18 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
     return loading
         ? const Loading()
         : StreamProvider<List<Claim?>>.value(
-            value: db.officerClaimList(filter["claim_state"], filter["agrarian_division"]),
+            value: db.officerClaimList(
+                filter["claim_state"], filter["agrarian_division"]),
             initialData: const [],
             child: Scaffold(
-              body: NestedScrollView( headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              body: NestedScrollView(
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                           title: const Text('Crop Assister - Officer'),
-                          backgroundColor: const Color.fromARGB(255, 201, 195, 117),
+                          backgroundColor:
+                              const Color.fromARGB(255, 0, 121, 107),
                           elevation: 0.0,
                           actions: <Widget>[
                             // IconButton(
@@ -80,8 +85,7 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
                                 icon: const Icon(Icons.power_settings_new),
                                 onPressed: () async {
                                   await _auth.signoutUser(widget.key, context);
-                                }
-                            ),
+                                }),
                           ],
                           pinned: true,
                           floating: true),
@@ -94,7 +98,7 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
                   children: [
                     const DrawerHeader(
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 201, 195, 117),
+                        color: Color.fromARGB(255, 0, 121, 107),
                       ),
                       child: Text('Crop Assister'),
                     ),
@@ -108,24 +112,24 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
 
                         if (filter_result != null && filter_result) {
                           Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => super.widget));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      super.widget));
                         }
                       },
                     ),
-
                     ListTile(
-                        title: const Text('Edit Profile'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    OfficerEditData(uid: widget.uid)),
-                          );
-                        },
-                      ),
+                      title: const Text('Edit Profile'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  OfficerEditData(uid: widget.uid)),
+                        );
+                      },
+                    ),
                     ListTile(
                       title: const Text('Logout'),
                       onTap: () async {

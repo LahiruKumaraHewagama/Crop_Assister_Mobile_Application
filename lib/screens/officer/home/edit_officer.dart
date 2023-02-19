@@ -64,9 +64,9 @@ class _OfficerEditDataState extends State<OfficerEditData> {
     });
   }
 
-
   void getUserProfileData() async {
-    final select_user = await DatabaseService(uid: widget.uid).getOfficerData(widget.uid);
+    final select_user =
+        await DatabaseService(uid: widget.uid).getOfficerData(widget.uid);
     setState(() {
       user = select_user;
       name = select_user!.name;
@@ -123,7 +123,7 @@ class _OfficerEditDataState extends State<OfficerEditData> {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: const Text('Edit Profile'),
-              backgroundColor: const Color.fromARGB(255, 201, 195, 117),
+              backgroundColor: const Color.fromARGB(255, 0, 121, 107),
               elevation: 0.0,
               actions: <Widget>[
                 TextButton.icon(
@@ -138,16 +138,17 @@ class _OfficerEditDataState extends State<OfficerEditData> {
               ],
             ),
             body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric( vertical: 20.0, horizontal: 50.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 50.0),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.name,
-                        decoration: textInputDecoration.copyWith(hintText: 'Name'),
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Name'),
                         initialValue: name,
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your name' : null,
@@ -173,7 +174,9 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                       TextFormField(
                         keyboardType: TextInputType.phone,
                         readOnly: true,
-                        style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 147, 148, 148)),
+                        style: const TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 147, 148, 148)),
                         decoration: textInputDecoration.copyWith(
                             hintText: 'Phone Number'),
                         initialValue: phone_no,
@@ -186,75 +189,85 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                       ),
                       const SizedBox(height: 20.0),
                       Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                          if (textEditingValue.text == '') {
-                            return const Iterable<String>.empty();
-                          }
-                          return _agrarianDivisionOptions.where((String option) {
-                            return option.contains(textEditingValue.text.toLowerCase());
-                          });
-                        }, 
-                      initialValue: TextEditingValue(text: agrarian_division),
-                      fieldViewBuilder: (BuildContext context,  TextEditingController fieldTextEditingController, FocusNode fieldFocusNode, VoidCallback onFieldSubmitted) {
-                        return TextFormField(
-                          controller: fieldTextEditingController,
-                          focusNode: fieldFocusNode,
-                          keyboardType: TextInputType.text,
-                          decoration: textInputDecoration.copyWith( hintText: 'Agrarian Division'),
-                          validator: (val) => agrarian_division.isEmpty
-                              ? 'Select your agrarian division'
-                              : null,
-                          onChanged: (val) {
-                            setState(() => agrarian_division = "");
-                            setState(() => error = "");
-                          },
-                        );
-                      }, onSelected: (String selection) {
-                        setState(() => agrarian_division = selection);
-                        setState(() => error = "");
-                        // debugPrint('You just selected $selection');
-                      }),
-
-                      const SizedBox(height: 20.0),
-                      Autocomplete<String>(
                           optionsBuilder: (TextEditingValue textEditingValue) {
-                        if (textEditingValue.text == '') {
-                          return const Iterable<String>.empty();
-                        }
-                        return _provinceOptions.where((String option) {
-                          return option
-                              .contains(textEditingValue.text.toLowerCase());
-                        });
-                      }, 
-                      initialValue: TextEditingValue(text: province),
-                      fieldViewBuilder: (BuildContext context,
+                            if (textEditingValue.text == '') {
+                              return const Iterable<String>.empty();
+                            }
+                            return _agrarianDivisionOptions
+                                .where((String option) {
+                              return option.contains(
+                                  textEditingValue.text.toLowerCase());
+                            });
+                          },
+                          initialValue:
+                              TextEditingValue(text: agrarian_division),
+                          fieldViewBuilder: (BuildContext context,
                               TextEditingController fieldTextEditingController,
                               FocusNode fieldFocusNode,
                               VoidCallback onFieldSubmitted) {
-                        return TextFormField(
-                          controller: fieldTextEditingController,
-                          focusNode: fieldFocusNode,
-                          keyboardType: TextInputType.text,
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Province'),
-                          validator: (val) =>
-                              province.isEmpty ? 'Select your province' : null,
-                          onChanged: (val) {
-                            setState(() => province = "");
-                            setState(() => error = "");
+                            return TextFormField(
+                              controller: fieldTextEditingController,
+                              focusNode: fieldFocusNode,
+                              keyboardType: TextInputType.text,
+                              decoration: textInputDecoration.copyWith(
+                                  hintText: 'Agrarian Division'),
+                              validator: (val) => agrarian_division.isEmpty
+                                  ? 'Select your agrarian division'
+                                  : null,
+                              onChanged: (val) {
+                                setState(() => agrarian_division = "");
+                                setState(() => error = "");
+                              },
+                            );
                           },
-                        );
-                      }, onSelected: (String selection) {
-                        setState(() => province = selection);
-                        setState(() => error = "");
-                        // debugPrint('You just selected $selection');
-                      }),
-
+                          onSelected: (String selection) {
+                            setState(() => agrarian_division = selection);
+                            setState(() => error = "");
+                            // debugPrint('You just selected $selection');
+                          }),
+                      const SizedBox(height: 20.0),
+                      Autocomplete<String>(
+                          optionsBuilder: (TextEditingValue textEditingValue) {
+                            if (textEditingValue.text == '') {
+                              return const Iterable<String>.empty();
+                            }
+                            return _provinceOptions.where((String option) {
+                              return option.contains(
+                                  textEditingValue.text.toLowerCase());
+                            });
+                          },
+                          initialValue: TextEditingValue(text: province),
+                          fieldViewBuilder: (BuildContext context,
+                              TextEditingController fieldTextEditingController,
+                              FocusNode fieldFocusNode,
+                              VoidCallback onFieldSubmitted) {
+                            return TextFormField(
+                              controller: fieldTextEditingController,
+                              focusNode: fieldFocusNode,
+                              keyboardType: TextInputType.text,
+                              decoration: textInputDecoration.copyWith(
+                                  hintText: 'Province'),
+                              validator: (val) => province.isEmpty
+                                  ? 'Select your province'
+                                  : null,
+                              onChanged: (val) {
+                                setState(() => province = "");
+                                setState(() => error = "");
+                              },
+                            );
+                          },
+                          onSelected: (String selection) {
+                            setState(() => province = selection);
+                            setState(() => error = "");
+                            // debugPrint('You just selected $selection');
+                          }),
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(hintText: 'NIC'),
-                        validator: (val) => val!.isEmpty ? 'Enter your nic' : null,
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'NIC'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter your nic' : null,
                         initialValue: nic,
                         onChanged: (val) {
                           setState(() => nic = val);
@@ -264,15 +277,16 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.streetAddress,
-                        decoration: textInputDecoration.copyWith(hintText: 'Address'),
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Address'),
                         initialValue: address,
-                        validator: (val) => val!.isEmpty ? 'Enter your address' : null,
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter your address' : null,
                         onChanged: (val) {
                           setState(() => address = val);
                           setState(() => error = "");
                         },
                       ),
-
                       const SizedBox(height: 40.0),
                       const Align(
                         alignment: Alignment.centerLeft,
@@ -282,33 +296,31 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
-                              color: Color.fromARGB(255, 32, 196, 100)),
+                              color: Color.fromARGB(255, 56, 142, 60)),
                         ),
                       ),
-
                       const SizedBox(height: 20.0),
                       TextButton(
-                                child: const Icon(
-                                  Icons.add_a_photo,
-                                  size: 50,
-                                ),
-                                onPressed: pickImage,
-                              ),
-
+                        child: const Icon(
+                          Icons.add_a_photo,
+                          size: 50,
+                        ),
+                        onPressed: pickImage,
+                      ),
                       const SizedBox(height: 10.0),
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(30.0),
-                        // ignore: unnecessary_null_comparison
-                        child: profile_image != null
-                            ? Image.file(File(profile_image!.path))
-                            : Image(image: NetworkImage(profile_network_image))
-                      ),
+                          borderRadius: BorderRadius.circular(30.0),
+                          // ignore: unnecessary_null_comparison
+                          child: profile_image != null
+                              ? Image.file(File(profile_image!.path))
+                              : Image(
+                                  image: NetworkImage(profile_network_image))),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                           child: const Text('Update'),
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromARGB(
-                                255, 71, 143, 75), // background
+                                255, 56, 142, 60), // background
                             onPrimary: Colors.white, // foreground
                           ),
                           onPressed: () async {
@@ -319,13 +331,15 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                               });
 
                               String profile_url = "";
-                              DatabaseService db = DatabaseService(uid: widget.uid);
+                              DatabaseService db =
+                                  DatabaseService(uid: widget.uid);
 
-                              // if (profile_image == null) {
-                              //   profile_url = profile_network_image;
-                              // } else {
-                              //   profile_url = await db.uploadFileToFirebase( "profile", "profile_", profile_image);
-                              // }
+                              if (profile_image == null) {
+                                profile_url = profile_network_image;
+                              } else {
+                                profile_url = await db.uploadFileToFirebase(
+                                    "profile", "profile_", profile_image);
+                              }
 
                               var user_data = {
                                 "uid": widget.uid,
@@ -340,8 +354,9 @@ class _OfficerEditDataState extends State<OfficerEditData> {
                                 "profile_url": profile_url
                               };
 
-                              bool isSuccess = await db.updateUserData(user_data);
-                              
+                              bool isSuccess =
+                                  await db.updateUserData(user_data);
+
                               setState(() {
                                 loading = false;
                               });
