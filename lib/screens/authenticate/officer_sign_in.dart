@@ -82,6 +82,7 @@ class _OfficerSignInState extends State<OfficerSignIn> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
                         decoration: textInputDecoration.copyWith(
                             border: OutlineInputBorder(
                               borderRadius:
