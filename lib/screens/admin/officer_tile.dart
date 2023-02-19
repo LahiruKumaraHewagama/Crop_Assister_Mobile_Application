@@ -8,7 +8,8 @@ class OfficerTile extends StatelessWidget {
   final String? uid;
   final Officer? officer;
 
-  const OfficerTile({Key? key, required this.uid , required this.officer}) : super(key: key);
+  const OfficerTile({Key? key, required this.uid, required this.officer})
+      : super(key: key);
 
   Future<Widget> getImage() async {
     final Completer<Widget> completer = Completer();
@@ -20,7 +21,10 @@ class OfficerTile extends StatelessWidget {
       if (info.image.width == 80 && info.image.height == 160) {
         completer.complete(const Text('No Image'));
       } else {
-        completer.complete(Image(image: image, width: 400,));
+        completer.complete(Image(
+          image: image,
+          width: 400,
+        ));
       }
     });
 
@@ -32,42 +36,45 @@ class OfficerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Card(
-        elevation: 5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-
-            ListTile(
-              isThreeLine : true,
-              leading: CircleAvatar(
-                    backgroundImage: NetworkImage(officer!.profile_url),
-                    radius: 25,
-                  ),
-
-              title: Text(officer!.name, 
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                          color: Color.fromARGB(255, 0, 0, 0)
-                        )
-                      ),
-              subtitle: Text(
-                      officer!.phone_no + "\n" + officer!.agrarian_division,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontSize: 15.0,
-                          color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
-
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OfficerProfile(uid: uid, officer_uid:officer!.uid)),
-                );
-              },
-            ),
-          ],
+      child: SizedBox(
+        height: 100,
+        child: Card(
+          elevation: 5,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              ListTile(
+                isThreeLine: true,
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(officer!.profile_url),
+                  radius: 25,
+                ),
+                title: Text(officer!.name,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Color.fromARGB(255, 0, 0, 0))),
+                subtitle: Text(
+                  officer!.phone_no +
+                      "\n" +
+                      officer!.agrarian_division +
+                      "\n" +
+                      officer!.email,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontSize: 15.0, color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OfficerProfile(
+                            uid: uid, officer_uid: officer!.uid)),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
