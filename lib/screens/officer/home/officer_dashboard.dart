@@ -62,7 +62,7 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
                       SliverAppBar(
                           title: const Text('Crop Assister - Officer'),
                           backgroundColor:
-                              const Color.fromARGB(255, 0, 121, 107),
+                              const Color.fromARGB(255, 105, 184, 109),
                           elevation: 0.0,
                           actions: <Widget>[
                             // IconButton(
@@ -84,12 +84,15 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    const DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 121, 107),
-                      ),
-                      child: Text('Crop Assister'),
-                    ),
+                    const SizedBox(height: 1.0),
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
+                          const SizedBox(height: 5.0),
+                              Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:1 , 
+                          color: Color.fromARGB(255, 45, 46, 46)  ),
                     ListTile(
                       title: const Text('Update Password'),
                       onTap: () async {

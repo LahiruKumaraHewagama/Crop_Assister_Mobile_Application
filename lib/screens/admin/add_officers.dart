@@ -289,13 +289,26 @@ class _AddOfficerState extends State<AddOfficer> {
                               ),
                       ),
                       const SizedBox(height: 20.0),
+                      
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  const SizedBox(height: 10.0),
                       ElevatedButton(
-                          child: const Text('Submit'),
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(
-                                255, 71, 143, 75), // background
-                            onPrimary: Colors.white, // foreground
-                          ),
+                           child: const Text('Submit'),
+                           style: ElevatedButton.styleFrom(
+                                primary: const Color.fromARGB(
+                                    255, 71, 143, 75), // background
+                                onPrimary: Colors.white, // foreground
+                                textStyle: const TextStyle(fontSize: 20),
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(20.0),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 50.0),
+                              ),
                           onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {

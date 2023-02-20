@@ -180,17 +180,7 @@ class _ClaimProfileState extends State<ClaimView> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 20.0),
-                CarouselSlider(
-                  options: CarouselOptions(
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
-                    initialPage: 2,
-                    autoPlay: true,
-                  ),
-                  items: imageSliders,
-                ),
-                const SizedBox(height: 30.0),
+               
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
@@ -202,7 +192,38 @@ class _ClaimProfileState extends State<ClaimView> {
                         color: Color.fromARGB(255, 32, 196, 100)),
                   ),
                 ),
+                  const SizedBox(height: 30.0),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    initialPage: 2,
+                    autoPlay: true,
+                  ),
+                  items: imageSliders,
+                ),
+               
+                const SizedBox(height: 10.0),
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  const SizedBox(height: 10.0),
                 const SizedBox(height: 20.0),
+                
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.claim!.description,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(                   
+                        fontSize: 15.0,
+                        color: Color.fromARGB(255, 80, 79, 79)),
+                  ),
+                ),
+                const SizedBox(height: 30.0),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -211,25 +232,15 @@ class _ClaimProfileState extends State<ClaimView> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20.0,
-                        color: Color.fromARGB(255, 146, 141, 85)),
+                        color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    widget.claim!.description,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Color.fromARGB(255, 80, 79, 79)),
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Crop type - " +
+                    "Status - " +
+                        widget.claim!.status +
+                        "\nCrop type - " +
                         widget.claim!.crop_type +
                         "\nReason for Damage - " +
                         widget.claim!.reason +
@@ -243,14 +254,13 @@ class _ClaimProfileState extends State<ClaimView> {
                         widget.claim!.damage_area +
                         "\nEstimated Damage - " +
                         widget.claim!.estimate +
-                        "\nEstimated Location - " +
-                        widget.claim!.claim_location.latitude.toString() +
-                        " : " +
-                        widget.claim!.claim_location.longitude.toString(),
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
+                        "\nLocation - " +
+                        widget.claim!.claim_location.latitude.toString().substring(0,5) +
+                        " | " +
+                        widget.claim!.claim_location.longitude.toString().substring(0,5),
+                    // overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(                        
+                        fontSize: 16.0,
                         color: Color.fromARGB(255, 80, 79, 79)),
                   ),
                 ),
@@ -266,11 +276,15 @@ class _ClaimProfileState extends State<ClaimView> {
                           : const Text('waiting for video to load')
                       : Container(),
                 ),
+                   const SizedBox(height: 10.0),
                 Align(
                     alignment: Alignment.bottomCenter,
                     child: widget.claim!.claim_video_url != "" &&
                             _videoPlayerController.value.isInitialized
                         ? FloatingActionButton(
+                          shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
                             onPressed: () {
                               setState(() {
                                 _videoPlayerController.value.isPlaying
@@ -285,6 +299,14 @@ class _ClaimProfileState extends State<ClaimView> {
                             ),
                           )
                         : Container()),
+                const SizedBox(height: 40.0),
+    
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  const SizedBox(height: 10.0),
 
                 // const SizedBox(height: 20.0),
                 // const Align(
