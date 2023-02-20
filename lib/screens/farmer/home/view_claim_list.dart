@@ -21,6 +21,7 @@ class _ViewClaimListState extends State<ViewClaimList> {
   @override
   Widget build(BuildContext context) {
     final claims = Provider.of<List<Claim?>>(context);
+    print(claims);
 
     return loading
         ? const Loading()
@@ -34,9 +35,7 @@ class _ViewClaimListState extends State<ViewClaimList> {
                   return ClaimTile(claim: claims[index]);
                 },
               )
-
               :
-
               const Align(
                 alignment: Alignment.topCenter,
                 child:Text(

@@ -56,8 +56,8 @@ class _FilterState extends State<Filter> {
             backgroundColor: const Color.fromARGB(255, 242, 255, 243),
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-                title: const Text('Update your view claim settings'),
-                backgroundColor: const Color.fromARGB(255, 0, 121, 107),
+                title: const Text('Update view claim settings'),
+                backgroundColor: const Color.fromARGB(255, 105, 184, 109),
                 elevation: 0.0),
             body: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
@@ -122,10 +122,18 @@ class _FilterState extends State<Filter> {
                           }),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
-                          child: const Text(
-                            'Update',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                       child: const Text('Set Filtering'),
+                     style: ElevatedButton.styleFrom(
+                              primary: const Color.fromARGB(
+                                  255, 71, 143, 75), // background
+                              onPrimary: Colors.white, // foreground
+                              textStyle: const TextStyle(fontSize:15),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 40.0),
+                            ),
                           onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {

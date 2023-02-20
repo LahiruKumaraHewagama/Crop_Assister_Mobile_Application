@@ -259,7 +259,7 @@ class _AddClaimState extends State<AddClaim> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
+                          fontSize: 20.0,
                           color: Color.fromARGB(255, 32, 196, 100)),
                     )),
                       const SizedBox(height: 5.0),        
@@ -648,7 +648,9 @@ class _AddClaimState extends State<AddClaim> {
                               }).toList(),
                             )
                           : Container()),
-                  const SizedBox(height: 20.0),
+                             const SizedBox(height: 10.0),
+                           
+                  const SizedBox(height: 10.0),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
                     child: video_file != null
@@ -668,19 +670,25 @@ class _AddClaimState extends State<AddClaim> {
                             onPressed: getVideo,
                           ),
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 10.0),
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  const SizedBox(height: 10.0),
                   ElevatedButton(
                       child: const Text('Submit'),
                      style: ElevatedButton.styleFrom(
                               primary: const Color.fromARGB(
                                   255, 71, 143, 75), // background
                               onPrimary: Colors.white, // foreground
-                              textStyle: const TextStyle(fontSize: 20),
+                              textStyle: const TextStyle(fontSize:15),
                               shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(20.0),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 50.0),
+                                  vertical: 20.0, horizontal: 40.0),
                             ),
                       onPressed: isSubmitComplete
                           ? null

@@ -95,14 +95,18 @@ class _ViewClaimListState extends State<ViewClaimList> {
                           },
                         ),
                         const SizedBox(height: 20.0),
-                        ElevatedButton(
-                            child: const Text(
-                              'Update',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(
-                                  255, 0, 121, 107), // Foreground
+                          ElevatedButton(
+                       child: const Text('Set Filtering'),
+                     style: ElevatedButton.styleFrom(
+                              primary: const Color.fromARGB(
+                                  255, 71, 143, 75), // background
+                              onPrimary: Colors.white, // foreground
+                              textStyle: const TextStyle(fontSize:15),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 40.0),
                             ),
                             onPressed: () async {
                               if (_formKey.currentState != null &&

@@ -94,22 +94,22 @@ class _FarmerAddDataState extends State<FarmerAddData> {
               elevation: 0.0,
               actions: <Widget>[
 
-                TextButton.icon(
-                    icon: const Icon(Icons.person),
-                    label: const Text('Officer'),
-                    style: TextButton.styleFrom(
-                      primary: Colors.white, // foreground
-                    ),
-                    onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute( builder: (context) => OfficerAddData(uid: widget.uid, phone_no: widget.phone_no))
-                        );
-                    }
-                ),
+                // TextButton.icon(
+                //     icon: const Icon(Icons.person),
+                //     label: const Text('Officer'),
+                //     style: TextButton.styleFrom(
+                //       primary: Colors.white, // foreground
+                //     ),
+                //     onPressed: () async {
+                //         Navigator.pushReplacement(
+                //           context,
+                //           MaterialPageRoute( builder: (context) => OfficerAddData(uid: widget.uid, phone_no: widget.phone_no))
+                //         );
+                //     }
+                // ),
 
                 IconButton(
-                  icon: const Icon(Icons.power_settings_new),
+                  icon: const Icon(Icons.arrow_back_outlined),
                   onPressed: () async {
                     await _auth.signoutUser(widget.key, context);
                   }
@@ -123,6 +123,11 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
+
+                       const SizedBox(height: 5.0),
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
+                          const SizedBox(height: 10.0),
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -138,7 +143,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       TextFormField(
                         keyboardType: TextInputType.name,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Name'),
+                            textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Name'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your name' : null,
                         onChanged: (val) {
@@ -150,7 +166,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Email'),
+                            textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Email'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your email' : null,
                         onChanged: (val) {
@@ -183,6 +210,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                           focusNode: fieldFocusNode,
                           keyboardType: TextInputType.text,
                           decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                               hintText: 'Agrarian Division'),
                           validator: (val) => agrarian_division.isEmpty
                               ? 'Select your agrarian division'
@@ -201,7 +240,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'NIC'),
+                            textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'NIC'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your nic' : null,
                         onChanged: (val) {
@@ -213,7 +263,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       TextFormField(
                         keyboardType: TextInputType.streetAddress,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Address'),
+                            textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Address'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your address' : null,
                         onChanged: (val) {
@@ -245,7 +306,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                           controller: fieldTextEditingController,
                           focusNode: fieldFocusNode,
                           keyboardType: TextInputType.text,
-                          decoration: textInputDecoration.copyWith(
+                          decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                               hintText: 'Province'),
                           validator: (val) =>
                               province.isEmpty ? 'Select your province' : null,
@@ -275,7 +347,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'Bank Name'),
+                            textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),hintText: 'Bank Name'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your bank name' : null,
                         onChanged: (val) {
@@ -286,7 +369,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
+                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                             hintText: 'Name in Bank Account'),
                         validator: (val) => val!.isEmpty
                             ? 'Enter your name in bank account'
@@ -299,7 +393,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
+                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                             hintText: 'Account No'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your account no' : null,
@@ -311,7 +416,18 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(
+                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 0, 129, 32)),
+                                ),
                             hintText: 'Branch Name'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your branch name' : null,
@@ -346,14 +462,28 @@ class _FarmerAddDataState extends State<FarmerAddData> {
                                 onPressed: pickImage,
                               ),
                       ),
-                      const SizedBox(height: 20.0),
+
+                               const SizedBox(height: 40.0),
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  
+                      const SizedBox(height: 10.0),
                       ElevatedButton(
                           child: const Text('Submit'),
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(
-                                255, 71, 143, 75), // background
-                            onPrimary: Colors.white, // foreground
-                          ),
+                           style: ElevatedButton.styleFrom(
+                                primary: const Color.fromARGB(
+                                    255, 71, 143, 75), // background
+                                onPrimary: Colors.white, // foreground
+                                textStyle: const TextStyle(fontSize: 20),
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(20.0),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 50.0),
+                              ),
                           onPressed: () async {
                             // print("agrarian_division {$agrarian_division}");
                             
