@@ -169,19 +169,20 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.name,
-                        decoration:
-                            textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),hintText: 'Name'),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Name'),
                         initialValue: name,
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your name' : null,
@@ -193,19 +194,20 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        decoration:
-                            textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),hintText: 'Email'),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Email'),
                         initialValue: email,
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your email' : null,
@@ -221,18 +223,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                         style: const TextStyle(
                             fontSize: 18,
                             color: Color.fromARGB(255, 147, 148, 148)),
-                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
                             hintText: 'Phone Number'),
                         initialValue: phone_no,
                         validator: (val) =>
@@ -264,18 +267,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                               controller: fieldTextEditingController,
                               focusNode: fieldFocusNode,
                               keyboardType: TextInputType.text,
-                              decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                              decoration: textInputDecoration.copyWith(
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
                                   hintText: 'Agrarian Division'),
                               validator: (val) => agrarian_division.isEmpty
                                   ? 'Select your agrarian division'
@@ -294,19 +298,20 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration:
-                            textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),hintText: 'NIC'),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'NIC'),
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your nic' : null,
                         initialValue: nic,
@@ -318,19 +323,20 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.streetAddress,
-                        decoration:
-                            textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),hintText: 'Address'),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Address'),
                         initialValue: address,
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your address' : null,
@@ -359,18 +365,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                               controller: fieldTextEditingController,
                               focusNode: fieldFocusNode,
                               keyboardType: TextInputType.text,
-                              decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                              decoration: textInputDecoration.copyWith(
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 0, 129, 32)),
+                                  ),
                                   hintText: 'Province'),
                               validator: (val) => province.isEmpty
                                   ? 'Select your province'
@@ -401,19 +408,20 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration:
-                            textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),hintText: 'Bank Name'),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            hintText: 'Bank Name'),
                         initialValue: account_name,
                         validator: (val) =>
                             val!.isEmpty ? 'Enter your bank name' : null,
@@ -425,18 +433,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
                             hintText: 'Name in Bank Account'),
                         initialValue: bank,
                         validator: (val) => val!.isEmpty
@@ -450,18 +459,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
                             hintText: 'Account No'),
                         initialValue: account_no,
                         validator: (val) =>
@@ -474,18 +484,19 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: textInputDecoration.copyWith(border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 0, 129, 32)),
-                                ),
+                        decoration: textInputDecoration.copyWith(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 129, 32)),
+                            ),
                             hintText: 'Branch Name'),
                         initialValue: branch,
                         validator: (val) =>
@@ -526,17 +537,17 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                           child: const Text('Update'),
-                           style: ElevatedButton.styleFrom(
-                                primary: const Color.fromARGB(
-                                    255, 71, 143, 75), // background
-                                onPrimary: Colors.white, // foreground
-                                textStyle: const TextStyle(fontSize: 20),
-                                shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(20.0),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 50.0),
-                              ),
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color.fromARGB(
+                                255, 71, 143, 75), // background
+                            onPrimary: Colors.white, // foreground
+                            textStyle: const TextStyle(fontSize: 20),
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 50.0),
+                          ),
                           onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {
@@ -548,12 +559,12 @@ class _FarmerEditDataState extends State<FarmerEditData> {
                               DatabaseService db =
                                   DatabaseService(uid: widget.uid);
 
-                              // if (profile_image == null) {
-                              //   profile_url = profile_network_image;
-                              // } else {
-                              //   profile_url = await db.uploadFileToFirebase(
-                              //       "profile", "profile_", profile_image);
-                              // }
+                              if (profile_image == null) {
+                                profile_url = profile_network_image;
+                              } else {
+                                profile_url = await db.uploadFileToFirebase(
+                                    "profile", "profile_", profile_image);
+                              }
 
                               var user_data = {
                                 "uid": widget.uid,
