@@ -8,7 +8,7 @@ import 'package:crop_damage_assessment_app/services/auth.dart';
 import '../../../models/notification_model.dart';
 import '../../notification/notification.dart';
 import '../../notification/view_notification_list.dart';
-import '../../officer/home/filter.dart';
+import '../../farmer/home/filter.dart';
 import 'claim_dashboard.dart';
 import 'edit_farmer.dart';
 
@@ -304,7 +304,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                               primary: const Color.fromARGB(
                                   255, 71, 143, 75), // background
                               onPrimary: Colors.white, // foreground
-                              textStyle: const TextStyle(fontSize: 20),
+                              textStyle: const TextStyle(fontSize: 15),
                               shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(20.0),
                               ),
@@ -338,12 +338,16 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
-                      const DrawerHeader(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 105, 184, 109),
-                        ),
-                        child: Text('Crop Assister'),
-                      ),
+                      const SizedBox(height: 1.0),
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/crop-assister.appspot.com/o/Crop%20assister%20app%20%20PNG.png?alt=media&token=e9067fd2-4eac-4df4-93be-185589e15833'),
+                          const SizedBox(height: 5.0),
+                              Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:1 , 
+                          color: Color.fromARGB(255, 45, 46, 46)  ),
+                      
                        ListTile(
                         title: const Text('Home'),
                         onTap: () {
@@ -367,7 +371,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                         },
                       ),
                       ListTile(
-                        title: const Text('Settings'),
+                        title: const Text('Filter Settings'),
                         onTap: () async {
                           final filter_result = await Navigator.push(
                               context,

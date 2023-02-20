@@ -44,11 +44,19 @@ class _ClaimProfileState extends State<ClaimProfile> {
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 20.0),
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user!.profile_url),
-                  radius: 100,
-                ),
+                const SizedBox(height: 10.0),
+                ClipRRect(
+  borderRadius: BorderRadius.circular(24),
+  child: SizedBox.fromSize(
+    size: const Size.fromRadius(100),
+    child: Image.network(
+      user!.profile_url,
+      fit: BoxFit.cover,
+    ),
+  ),
+),
+     
+
                 const SizedBox(height: 20.0),
                 Align(
                   alignment: Alignment.center,
@@ -72,7 +80,13 @@ class _ClaimProfileState extends State<ClaimProfile> {
                         color: Color.fromARGB(255, 80, 79, 79)),
                   ),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),                       
+                               Container(
+                        alignment: Alignment.centerLeft,
+                          width: 300,
+                          height:2 , 
+                          color: Color.fromARGB(255, 98, 98, 98)  ),
+                  const SizedBox(height: 10.0),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -100,7 +114,7 @@ class _ClaimProfileState extends State<ClaimProfile> {
                         user!.nic,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                    
                         fontSize: 18.0,
                         color: Color.fromARGB(255, 80, 79, 79)),
                   ),
@@ -130,8 +144,7 @@ class _ClaimProfileState extends State<ClaimProfile> {
                         "\nAccount No - " +
                         user!.account_no,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                    style: const TextStyle(                        
                         fontSize: 18.0,
                         color: Color.fromARGB(255, 80, 79, 79)),
                   ),

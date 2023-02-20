@@ -39,19 +39,6 @@ class _OfficerDashboardState extends State<OfficerDashboard> {
     });
   }
 
-  // void _showSettingsPanel(BuildContext context) {
-  //   // showModalBottomSheet(
-  //   //     context: context,
-  //   //     isScrollControlled: true,
-  //   //     builder: (context) {
-  //   //       return Container(
-  //   //         padding:
-  //   //             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-  //   //         child: Filter(uid: widget.uid),
-  //   //       );
-  //   //     });
-  // }
-
   @override
   void initState() {
     super.initState();

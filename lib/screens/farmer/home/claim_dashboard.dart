@@ -55,16 +55,6 @@ class _ClaimDashboardState extends State<ClaimDashboard> {
     super.initState();
     initFarmer();
     _getAllNotifications();
-
-    // FirebaseMessaging.instance.getInitialMessage();
-
-    // //foreground
-    // FirebaseMessaging.onMessage.listen((message){
-    //   if(message.notification != null){
-    //       print(message.notification!.body);
-    //       print(message.notification!.title);
-    //   }
-    // });
   }
 
   _getAllNotifications() async {
@@ -72,8 +62,7 @@ class _ClaimDashboardState extends State<ClaimDashboard> {
     var allnotifications =
         await notificationservice.fetchAllNotificationDetails(uid);
     allnotifications.forEach((notification) {
-      print(notification['to'] +
-          "------------------------------------------------------------");
+      print(notification['to'] +"------------------------------------------------------------");
       if (notification['status'] == 'unread') {
         setState(() {
           _notifications.add(notification);
@@ -92,7 +81,6 @@ class _ClaimDashboardState extends State<ClaimDashboard> {
       var datetime = DateFormat.jm()
           .add_yMd()
           .format(DateTime.parse(element['date'].toDate().toString()));
-      // var datetime = element['date'];
       var message = element['message'];
 
       var from = "";
