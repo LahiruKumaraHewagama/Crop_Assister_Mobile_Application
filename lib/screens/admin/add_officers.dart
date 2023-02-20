@@ -83,7 +83,7 @@ class _AddOfficerState extends State<AddOfficer> {
     return loading
         ? const Loading()
         : Scaffold(
-            backgroundColor: const Color.fromARGB(255, 242, 255, 243),
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: const Text('Officer - Registraion'),
